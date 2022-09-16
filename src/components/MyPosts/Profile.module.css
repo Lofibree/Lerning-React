@@ -1,0 +1,12 @@
+.content {
+    grid-area: c;
+    /* background-color: brown; */
+    /* width: 100px; */
+    /* grid-template-columns: 1fr 1fr; */
+    /* display: block; */
+}
+
+.content img {
+    /* width: 600px; */
+    object-fit: cover;
+}

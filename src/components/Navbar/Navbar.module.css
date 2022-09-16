@@ -1,0 +1,23 @@
+.navdiv {
+    grid-area: n;
+    background-color: blueviolet;
+    padding: 7px;
+    font-size: 20px;
+}
+
+.nav {
+    background-color: blueviolet;
+    padding: 7px;
+    font-size: 20px;
+}
+
+.item {
+    color: white;
+
+}
+
+.item.active {
+    color: gold;
+    font-weight: bold;
+    
+}

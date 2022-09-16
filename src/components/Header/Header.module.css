@@ -1,0 +1,17 @@
+.header {
+  grid-area: h;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40px; */
+  background-color: green;
+  /* display: inline-block; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* display:block; */
+}
+
+.header img {
+  width: 100px;
+  float: left;
+  margin: 5px;
+}

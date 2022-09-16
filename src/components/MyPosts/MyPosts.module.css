@@ -1,0 +1,15 @@
+
+.posts {
+    /* margin: 10px; */
+    padding: 10px;
+    padding-left: 50px;
+    background-color: violet;
+}
+
+.posts h5 {
+    font-size: 28px;
+}
+
+.item {
+    color: white;
+}
