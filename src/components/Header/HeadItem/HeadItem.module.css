@@ -6,10 +6,15 @@
     grid-gap: 10px;
     width: fit-content;
     padding: 5px;
+    border-radius: 15px;
+    /* background: #dddddd; */
+    color: white;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(245, 119, 119, 0.5);
+    box-shadow: 0 5px 10px 0 rgba(252, 118, 118, 0.5);
 }
 
 .item:hover {
     cursor: pointer;
-    background-color:brown;
+    background-color:rgb(165, 42, 42);
     color: white;
 }

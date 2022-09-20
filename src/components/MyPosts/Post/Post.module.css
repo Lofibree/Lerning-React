@@ -2,6 +2,18 @@
 .item {
     color: white;
     padding: 5px;
+    /* border: 1px solid rgb(219, 175, 175); */
+    border-radius: 10px;
+    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    margin: 5px;
+}
+.item:hover {
+    background-color: rgb(69, 69, 128);
+    cursor: pointer;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 15px 25px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 15px 25px 0 rgb(0 0 0 / 50%);
 }
 
 .item img {
@@ -9,4 +21,11 @@
     height: 3rem;
     padding-right: 5px;
     border-radius: 20px;
+}
+
+.postName {
+    font-size: 24px;
+    font-weight: 600;
+    color:rgb(213, 118, 118);
+
 }

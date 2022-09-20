@@ -1,23 +1,27 @@
 .navdiv {
     grid-area: n;
     background-color: blueviolet;
+    background-color: #21438C;
     padding: 7px;
-    font-size: 20px;
+    font-size: 30px;
+    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    border-radius: 10px;
 }
 
 .nav {
     background-color: blueviolet;
+    background-color: #21438C;
     padding: 7px;
-    font-size: 20px;
+    font-size: 30px;
 }
 
-.item {
+.nav a {
     color: white;
-
+    text-decoration: none;
 }
 
-.item.active {
+a.activeLink {
     color: gold;
     font-weight: bold;
-    
 }

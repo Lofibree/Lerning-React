@@ -3,7 +3,10 @@
     /* margin: 10px; */
     padding: 10px;
     padding-left: 50px;
-    background-color: violet;
+    background-color: rgb(33, 96, 123);
+    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    border-radius: 10px;
 }
 
 .posts h5 {
