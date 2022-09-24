@@ -2,8 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css';
 // import ProfItem from './ProfItem/ProfItem';
+import FrendItem from './FrendItem/FrendItem';
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    const navBarEl = props.state.map(n => <FrendItem name={n.name} id={n.id} />)
+
     return (
         <div className={s.navdiv}>
             <nav className={s.nav}>
@@ -23,6 +27,14 @@ const Navbar = () => {
                     >
                         Dialogs
                     </NavLink>
+                </div>
+                <div >
+                    <div>
+                        Friends
+                    </div>
+                     <div className={s.friends}>
+                        {navBarEl}
+                    </div>
                 </div>
 
             </nav>

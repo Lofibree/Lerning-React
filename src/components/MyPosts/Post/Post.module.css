@@ -8,6 +8,18 @@
     box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     margin: 5px;
 }
+
+.item.active {
+    color: white;
+    padding: 5px;
+    /* border: 1px solid rgb(219, 175, 175); */
+    border-radius: 10px;
+    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    margin: 5px;
+    background-color: darkgray;
+}
+
 .item:hover {
     background-color: rgb(69, 69, 128);
     cursor: pointer;
