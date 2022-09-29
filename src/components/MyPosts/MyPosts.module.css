@@ -16,3 +16,16 @@
 .item {
     color: white;
 }
+.button {
+    background-color: cadetblue;
+    border-radius: 10px;
+    margin: 5px;
+    width: auto;
+    font-size: 25px;
+    color: white
+}
+
+.button:hover {
+    color: black;
+    cursor: pointer;
+}

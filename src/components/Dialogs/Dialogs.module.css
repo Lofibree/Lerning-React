@@ -19,6 +19,8 @@
 }
 
 .dialog {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
     padding: 10px;
     margin: 10px;
     color: black;
@@ -52,26 +54,28 @@
     cursor: pointer;
     -webkit-box-shadow: 0 10px 20px 0 rgb(0 0 0 / 50%);
     box-shadow: 0 10px 20px 0 rgb(0 0 0 / 50%);
+    transition: 0.2s;
 }
 
 .dialog .person{
-    font-size: 20px;
+    font-size: 25px;
     color: rgb(255, 255, 255);
     text-align: center;
-    padding: 10px;
+    padding: 5px;
 }
 
 .dialog .person:active{
     color: white;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .dialog .person:hover{
     color:black;
-    font-size: 25px;
+    font-size: 30px;
     -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     border-radius: 10px;
+    transition: 0.2s;
 }
 
 .message {
