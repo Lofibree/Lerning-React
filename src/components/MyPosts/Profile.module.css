@@ -10,3 +10,59 @@
     object-fit: cover;
     border-radius: 10px;
 }
+
+.newPostBox {
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.newPostBtn {
+    font-size: 25px;
+    border-radius: 7px;
+    color: white;
+    background-color: rgb(33, 96, 123);
+    padding: 5px;
+    margin: 5px;
+    font-weight: 600;
+    width: 127px;
+    height: 43px;
+}
+
+.newPostBtn:hover {
+    cursor: pointer;
+    color: rgb(213, 118, 118);
+    transition: 0.2s ease-out;
+    -webkit-box-shadow: 0 15px 45px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 15px 45px 0 rgb(0 0 0 / 50%);
+}
+
+.newPostText{
+    font-size: 25px;
+    background-color: rgb(33, 96, 123);
+    color: rgb(213, 118, 118);
+    padding: 5px;
+    margin: 5px;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 100px;
+    max-height: 200px;
+    border: 2px rgb(213, 118, 118) solid;
+    border-radius: 10px;
+}
+
+.newPostText:hover{
+    -webkit-box-shadow: 0 15px 45px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 15px 45px 0 rgb(0 0 0 / 50%);
+    transition: 0.2s;
+}
+
+.newPostText:focus{
+    border: 4px rgb(213, 118, 118) solid;
+    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    outline: none;
+}

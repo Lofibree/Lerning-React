@@ -11,7 +11,7 @@ import { addPost, updateNewPostText } from './redux/state';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state) => {
     root.render(
         <React.StrictMode>
             <App state={state}

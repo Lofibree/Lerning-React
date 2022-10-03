@@ -21,14 +21,17 @@ const Profile = (props) => {
     <div>
       <div className={s.content}>
         <ProfileInfo />
-        <button onClick={addPostR} className={s.button}>
-          New Post
-        </button>
-        <textarea
-          onChange={onPostChange}
-          ref={newPostEl}
-          value={props.profilePage.newPostText}
-        />
+        <div className={s.newPostBox}>
+          <button onClick={addPostR} className={s.newPostBtn}>
+            New Post
+          </button>
+          <textarea 
+            className={s.newPostText}
+            onChange={onPostChange}
+            ref={newPostEl}
+            value={props.profilePage.newPostText}
+          />
+        </div>
         <MyPosts
           addPost={props.addPost}
           postList={props.profilePage.posts}
