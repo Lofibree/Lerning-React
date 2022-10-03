@@ -2,18 +2,38 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import Post from './Post/Post';
 
 const Profile = (props) => {
 
-  let postsEl = props.state.posts
-  .map(p => <Post message={p.message} likeCount={p.likeCount} />);
+  let newPostEl = React.createRef();
+
+  let addPostR = () => {
+    props.addPost();
+  }
+
+  let onPostChange = () => {
+    let text = newPostEl.current.value;
+    props.updateNewPostText(text);
+    console.log(text);
+  }
 
   return (
     <div>
       <div className={s.content}>
-        <ProfileInfo/>
-        <MyPosts posts={postsEl}/>
+        <ProfileInfo />
+        <button onClick={addPostR} className={s.button}>
+          New Post
+        </button>
+        <textarea
+          onChange={onPostChange}
+          ref={newPostEl}
+          value={props.profilePage.newPostText}
+        />
+        <MyPosts
+          addPost={props.addPost}
+          postList={props.profilePage.posts}
+          newPostText={props.profilePage.newPostText}
+        />
       </div>
     </div>
   );
