@@ -20,6 +20,7 @@ let store = {
                 { id: 1, message: 'how are you' },
                 { id: 2, message: 'fuck you' },
             ],
+            newMessText: 'type mess',
             dialogs: [
                 // { id: 0, name: 'Sergey' },
                 { id: 1, name: 'lofi' },
@@ -56,6 +57,23 @@ let store = {
             this._callSubscriber(this._state);
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-MESSAGE') {
+                let newMess = {
+                    id: 5,
+                    message: this._state.messagePage.newMessText
+                };
+                this._state.messagePage.messages.push(newMess);
+                this._state.messagePage.newMessText = '';
+                this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-MESS-TEXT') {
+            this._state.messagePage.newMessText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'DELETE-MESS') {
+            this._state.messagePage.messages.splice(action.index, 1);
+            this._callSubscriber(this._state);
+        } else if (action.type === 'COMPLETE-EDIT') {
+            this._state.messagePage.messages[action.index].message = action.newText;
             this._callSubscriber(this._state);
         }
     }

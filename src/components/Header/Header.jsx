@@ -8,9 +8,11 @@ const Header = () => {
             {/* <div> */}
                 <a href='#'><img src='https://cdn.logo.com/hotlink-ok/logo-social.png' /></a>
             {/* </div> */}
-            <HeadItem title='Home'/>
-            <HeadItem title='Contacts'/>
-            <HeadItem title='About'/>
+            <div className={s.headItems}>
+                <HeadItem title='Home' />
+                <HeadItem title='Contacts' />
+                <HeadItem title='About' />
+            </div>
         </div>
     );
 };

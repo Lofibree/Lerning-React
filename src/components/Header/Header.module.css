@@ -2,7 +2,7 @@
   grid-area: h;
   background-color: green;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr;
 
   /* background-color: #0e0e0e; */
   -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
@@ -23,6 +23,13 @@
     align-items: center;
     border-radius: 10px;
 }
+
+
+.headItems {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 
 .header img {
   width: 100px;
