@@ -8,15 +8,17 @@ const Profile = (props) => {
   let newPostEl = React.createRef();
 
   let addPostR = () => {
-    props.addPost();
+    // props.addPost();
+    props.dispatch({ type: 'ADD-POST' });
   }
 
   let onPostChange = () => {
     let text = newPostEl.current.value;
-    props.updateNewPostText(text);
+    // props.updateNewPostText(text);
+    props.dispatch({ type: 'UPDATE-NEW-POST-TEXT', newText: text });
     console.log(text);
   }
-
+  
   return (
     <div>
       <div className={s.content}>
@@ -29,13 +31,13 @@ const Profile = (props) => {
             className={s.newPostText}
             onChange={onPostChange}
             ref={newPostEl}
-            value={props.profilePage.newPostText}
+            value={props.state.profilePage.newPostText}
           />
+          
         </div>
         <MyPosts
-          addPost={props.addPost}
-          postList={props.profilePage.posts}
-          newPostText={props.profilePage.newPostText}
+          postList={props.state}
+          dispatch={props.dispatch}
         />
       </div>
     </div>

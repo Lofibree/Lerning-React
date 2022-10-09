@@ -12,8 +12,8 @@ const MyPosts = (props) => {
   //   // debugger
   //   props.addPost(text);
   // }
-
-  let postsEl = props.postList
+  // debugger;
+  let postsEl = props.postList.profilePage.posts
   .map(p => <Post message={p.message} likeCount={p.likeCount} />);
 
   // debugger

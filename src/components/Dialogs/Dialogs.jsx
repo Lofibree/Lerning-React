@@ -30,15 +30,11 @@ const Dialogs = (props) => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsEl[0]}
-            </div>
-            <div>
-                {messageEl}
-            </div>
-            <div>
                 {messageEl}
             </div>
             <div className={s.dialogsItems}>
                 {dialogsEl[1]}
+                {messageEl}
             </div>
             {/* <button onClick={addNewMess}>New Message</button>
             <textarea ref={newMessText} />

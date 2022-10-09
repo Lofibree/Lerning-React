@@ -26,6 +26,13 @@
 
 .header img {
   width: 100px;
+  height: 59px;
   float: left;
-  margin: 5px;
+  /* margin: 5px; */
+  border-radius: 10px;
+}
+
+.header img:hover {
+  cursor: pointer;
+  transition: 0.2s ease;
 }
