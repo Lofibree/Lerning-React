@@ -13,8 +13,8 @@ const MyPosts = (props) => {
   //   props.addPost(text);
   // }
   // debugger;
-  let postsEl = props.postList.profilePage.posts
-  .map(p => <Post message={p.message} likeCount={p.likeCount} />);
+  let postsEl = props.state.profilePage.posts
+  .map(p => <Post message={p.message} likeCount={p.likeCount} time={p.time} state={props.state} dispatch={props.dispatch} index={props.state.profilePage.posts.indexOf(p)}/>);
 
   // debugger
 
@@ -23,10 +23,6 @@ const MyPosts = (props) => {
       <div>
         <div className={`${s.posts} ${s.item}`}>
           <h5>My posts</h5>
-          {/* <button onClick={addPostR} className={s.button}>
-            New Post
-          </button>
-          <textarea ref={newPostEl} /> */}
           {postsEl}
         </div>
       </div>

@@ -8,6 +8,7 @@
     -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     margin: 5px;
+    transition: 0.2s ease;
     word-wrap: break-word;
 }
 
@@ -54,16 +55,91 @@
     color: white;
 }
 
+.headerPost .postAuthor:hover {
+    text-decoration: underline;
+    transition: 0.2s ease;
+}
+
+
+
+.mainPost {
+    display: grid;
+    grid-template-columns: 3fr 1fr 60px;
+    grid-gap: 10px;
+}
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainPost .iconBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+.editBtn {
+    visibility: visible;
+    transition: 0.5s ease;
+}
+.editBtn.active {
+    visibility: hidden;
+}
+.editBtn:hover {
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+}
+.completeBtn {
+    transition: 0.2s ease;
+}
+.completeBtn:hover {
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+}
+.deleteBtn {
+    transition: 0.2s ease;
+}
+.deleteBtn:hover {
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+}
+
 .postText {
     font-size: 19px;
     font-weight: 600;
     color:rgb(213, 118, 118);
     margin: 25px auto;
+    word-break: break-all;
 }
 
 .postText.active {
     color:rgb(0, 0, 0);
 }
+
+.editText {
+    grid-area: 't';
+    display: none;
+    font-size: 20px;
+    background: #516189;
+    color:black;
+    padding: 5px;
+    margin: 10px;
+    min-width: 50px;
+    max-width: 200px;
+    max-height: 50px;
+    min-height: 50px;
+    border: 2px rgb(94, 16, 16) solid;
+    border-radius: 10px;
+}
+.editText.active {
+    display: block;
+}
+
+
+
 
 .likes {
     font-size: 19px;

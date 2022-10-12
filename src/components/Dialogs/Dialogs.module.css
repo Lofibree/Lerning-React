@@ -72,11 +72,16 @@
     /* display: flex;
     align-items: center;
     justify-content: space-between; */
-    display: grid;
+    /* display: grid; */
     /* grid-template-areas: 
     'h h'
     't t'; */
-    grid-template-rows: 0.5fr 1fr;
+    /* grid-template-rows: 0.5fr 1fr; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    min-width: 280px;
     padding: 10px;
     margin: 10px;
     margin-left: 90px;
@@ -92,11 +97,16 @@
 
 .messText {
     display: grid;
-    grid-template-columns: 20px 1fr;
+    grid-template-columns: 20px 3fr 1fr;
     grid-gap: 10px;
     word-break: break-all;
 }
 
+.messText .date {
+    display: flex;
+    align-items: center;
+    min-width: 40px;
+}
 
 .editText {
     grid-area: 't';
@@ -118,12 +128,36 @@
 }
 
 
-.message .editBtn:hover {
+
+
+.iconBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.editBtn {
+    visibility: visible;
+    transition: 0.5s ease;
+}
+.editBtn.active {
+    visibility: hidden;
+}
+.editBtn:hover {
     cursor: pointer;
     color: white;
     transition: 0.2s ease;
 }
-
+.completeBtn {
+    transition: 0.2s ease;
+}
+.completeBtn:hover {
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+}
+.deleteBtn {
+    transition: 0.2s ease;
+}
 .deleteBtn:hover {
     cursor: pointer;
     color: white;

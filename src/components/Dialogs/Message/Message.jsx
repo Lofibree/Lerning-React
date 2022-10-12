@@ -2,6 +2,8 @@ import React from 'react';
 import s from './../Dialogs.module.css';
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineCheck } from 'react-icons/ai'
 import { useState } from 'react';
+import moment from 'moment';
+import { useEffect } from 'react';
 
 
 const Message = (props) => {
@@ -9,29 +11,48 @@ const Message = (props) => {
 
     let editTextAreaEl = React.createRef();
 
-    const [styleTextArea, setStyleTextArea] = useState(s.editText)
-
-    // let onTextChange = () => {
-    //     let text = editTextAreaEl.current.value;
-    //     props.dispatch({ type: 'UPDATE-NEW-EDIT-TEXT', newText: text });
-    // }
+    const [styleTextArea, setStyleTextArea] = useState(s.editText);
+    const [styleEditBtn, setStyleEditBtn] = useState(s.editBtn);
 
 
     let editMess = () => {
         // debugger;
         setStyleTextArea(styleTextArea + ' ' + s.active);
+        setStyleEditBtn(styleEditBtn + ' ' + s.active);
+        props.dispatch({ type: 'UPDATE-EDIT-MESS-INIT', index: props.index })
+    }
+
+    let onEditChange = () => {
+        let text = editTextAreaEl.current.value;
+        props.dispatch({ type: 'UPDATE-EDIT-MESS-TEXT', newText: text })
     }
 
     let completeEdit = () => {
         setStyleTextArea(s.editText);
+        setStyleEditBtn(s.editBtn);
         let text = editTextAreaEl.current.value;
-        props.dispatch({ type: 'COMPLETE-EDIT', newText: text, index: props.index });
+        if (text !== '') {
+            props.dispatch({ type: 'COMPLETE-MESS-EDIT', index: props.index });
+        }
     }
 
     let deleteMess = () => {
         // debugger;
         props.dispatch({ type: 'DELETE-MESS', index: props.index })
     }
+
+
+    // let getDateMess = () => {
+    //     // debugger;
+    //     let dateMesse = moment().format('HH:mm');
+    //     props.dispatch({ type: 'GET-DATE', dateMess: dateMesse })
+    // }
+
+
+    // useEffect(() => {
+    //     let dateMesse = moment().format('HH:mm');
+    //     props.dispatch({ type: 'GET-DATE', dateMess: dateMesse })
+    // })
 
 
     return (
@@ -42,17 +63,18 @@ const Message = (props) => {
                     <div className={s.messText}>
                         <div>{props.index}.</div>
                         <div>{props.title}</div>
+                        <div className={s.date}>{props.time}</div>
                     </div>
                     <div className={s.iconBox}>
-                        <AiOutlineEdit className={s.editBtn} onClick={editMess} />
-                        <AiOutlineCheck onClick={completeEdit} />
+                        <AiOutlineEdit className={styleEditBtn} onClick={editMess} />
+                        <AiOutlineCheck className={s.completeBtn} onClick={completeEdit} />
                         <AiOutlineDelete className={s.deleteBtn} onClick={deleteMess} />
                     </div>
                 </div>
                 <textarea className={styleTextArea}
                     ref={editTextAreaEl}
-                // onChange={onTextChange}
-                // value={props.state.messagePage.messages[props.index].message}
+                    onChange={onEditChange}
+                    value={props.state.messagePage.editMessText}
                 />
             </div>
         </div>

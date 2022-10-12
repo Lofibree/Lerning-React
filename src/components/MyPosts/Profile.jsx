@@ -2,6 +2,8 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import { AiOutlineSend } from 'react-icons/ai';
+import moment from 'moment';
 
 const Profile = (props) => {
 
@@ -9,7 +11,8 @@ const Profile = (props) => {
 
   let addPostR = () => {
     // props.addPost();
-    props.dispatch({ type: 'ADD-POST' });
+    let timeMesse = moment().format('HH:mm');
+    props.dispatch({ type: 'ADD-POST', time: timeMesse });
   }
 
   let onPostChange = () => {
@@ -18,25 +21,27 @@ const Profile = (props) => {
     props.dispatch({ type: 'UPDATE-NEW-POST-TEXT', newText: text });
     console.log(text);
   }
-  
+
   return (
     <div>
       <div className={s.content}>
         <ProfileInfo />
         <div className={s.newPostBox}>
-          <button onClick={addPostR} className={s.newPostBtn}>
+          {/* <button onClick={addPostR} className={s.newPostBtn}>
             New Post
-          </button>
-          <textarea 
+          </button> */}
+          <textarea
             className={s.newPostText}
             onChange={onPostChange}
             ref={newPostEl}
             value={props.state.profilePage.newPostText}
           />
-          
+          <AiOutlineSend onClick={addPostR} className={s.btnMess} />
+
+
         </div>
         <MyPosts
-          postList={props.state}
+          state={props.state}
           dispatch={props.dispatch}
         />
       </div>
