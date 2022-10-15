@@ -91,6 +91,11 @@
     transition: 0.2s ease;
 }
 .completeBtn {
+    display: none;
+    transition: 0.2s ease;
+}
+.completeBtn.active {
+    display: block;
     transition: 0.2s ease;
 }
 .completeBtn:hover {
@@ -110,6 +115,7 @@
 .postText {
     font-size: 19px;
     font-weight: 600;
+    min-width: 112px;
     color:rgb(213, 118, 118);
     margin: 25px auto;
     word-break: break-all;

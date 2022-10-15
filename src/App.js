@@ -1,42 +1,41 @@
 import './App.css';
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
-import Footer from './Footer/Footer';
+import Header from './components/Layout/Header/Header';
+import Navbar from './components/Layout/Navbar/Navbar';
+import Footer from './components/Layout/Footer/Footer';
 import Profile from './components/MyPosts/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import DialogItem from './components/Dialogs/DialogItem/DialogItem';
-import Message from './components/Dialogs/Message/Message';
-import Post from './components/MyPosts/Post/Post';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import { Route, Routes } from 'react-router-dom';
+import DialogContainer from './components/Dialogs/Dialog/DialogContainer';
 
 const App = (props) => {
+
   return (
-    <BrowserRouter>
       <div className='body'>
         <div className="app-wrapper">
           <Header />
-          <Navbar state={props.state.navBar}/>
-          <Footer/>
-          {/* <ScrollBg/> */}
+          <Navbar state={props.state.navBar} />
+          <Footer />
           <div className="app-content">
             <Routes>
               <Route path='/profile'
                 element={<Profile
-                  state={props.state}
-                  dispatch={props.dispatch}
+                  store={props.store}
                 />}
               />
               <Route path='/dialogs'
-                element={<Dialogs 
-                  state={props.state} 
-                  dispatch={props.dispatch}
-                  />}
+                element={<DialogsContainer
+                store={props.store}
+                />}
+              />
+              <Route path='/dialogs/:id'
+                element={<DialogContainer 
+                store={props.store}
+                />}
               />
             </Routes>
           </div>
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 

@@ -1,30 +1,35 @@
 import React from 'react';
 import s from './MyPosts.module.css';
-import Post from './Post/Post';
+import moment from 'moment';
+import { AiOutlineSend } from 'react-icons/ai'
 
 const MyPosts = (props) => {
 
-  // let newPostEl = React.createRef();
+  let newPostEl = React.createRef();
+  let onAddPost = () => {
+    let timeMesse = moment().format('HH:mm');
+    props.addPost(timeMesse);
+  }
 
-  // let addPostR = () => {
-  //   let text = newPostEl.current.value;
-  //   // alert(text)
-  //   // debugger
-  //   props.addPost(text);
-  // }
+  let onPostChange = () => {
+    let text = newPostEl.current.value;
+    props.updateNewPostText(text);
+  }
   // debugger;
-  let postsEl = props.state.profilePage.posts
-  .map(p => <Post message={p.message} likeCount={p.likeCount} time={p.time} state={props.state} dispatch={props.dispatch} index={props.state.profilePage.posts.indexOf(p)}/>);
-
-  // debugger
-
   return (
     <div>
-      <div>
-        <div className={`${s.posts} ${s.item}`}>
-          <h5>My posts</h5>
-          {postsEl}
-        </div>
+      <div className={s.newPostBox}>
+        <textarea
+          className={s.newPostText}
+          onChange={onPostChange}
+          ref={newPostEl}
+          value={props.value}
+        />
+        <AiOutlineSend onClick={onAddPost} className={s.btnMess} />
+      </div>
+      <div className={`${s.posts} ${s.item}`}>
+        <h5>My posts</h5>
+        {props.postsEl}
       </div>
     </div>
   );
