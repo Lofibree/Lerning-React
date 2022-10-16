@@ -3,35 +3,44 @@ import PostContainer from './Post/PostContainer';
 import moment from 'moment';
 import MyPosts from './MyPosts';
 import { addPostActionCreator, updateNewPostTextActionCreator } from '../../redux/profileReducer';
+import StoreContext from '../../StoreContext';
 
-const MyPostsContainer = (props) => {
+const MyPostsContainer = () => {
 
-  let addPostR = () => {
-    let timeMesse = moment().format('HH:mm');
-    props.store.dispatch(addPostActionCreator(timeMesse));
-  }
+  return (
+    <StoreContext.Consumer>
+      {
+        (store) => {
 
-  let onPostChange = (text) => {
-    props.store.dispatch(updateNewPostTextActionCreator(text));
-  }
+          let addPostR = () => {
+            let timeMesse = moment().format('HH:mm');
+            store.dispatch(addPostActionCreator(timeMesse));
+          }
 
-  let postsEl = props.store.getState().profilePage.posts
-    .map(p => <PostContainer message={p.message}
-      likeCount={p.likeCount}
-      time={p.time}
-      state={props.store.getState()}
-      store={props.store}
-      index={props.store.getState().profilePage.posts.indexOf(p)}
-    />
-    );
+          let onPostChange = (text) => {
+            store.dispatch(updateNewPostTextActionCreator(text));
+          }
 
-
-  return (<MyPosts postsEl={postsEl} 
-    updateNewPostText={onPostChange}
-    addPost={addPostR} 
-    value={props.store.getState().profilePage.newPostText}
-    />
-    );
+          let postsEl = store.getState().profilePage.posts
+            .map(p => <PostContainer message={p.message}
+              likeCount={p.likeCount}
+              time={p.time}
+              state={store.getState()}
+              index={store.getState().profilePage.posts.indexOf(p)}
+            />
+            );
+            
+          return (
+            <MyPosts postsEl={postsEl}
+              updateNewPostText={onPostChange}
+              addPost={addPostR}
+              value={store.getState().profilePage.newPostText}
+            />
+          )
+        }
+      }
+    </StoreContext.Consumer>
+  );
 };
 
 export default MyPostsContainer;

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import s from './Post.module.css';
-import { editPostActionCreator, onEditChangePostActionCreator, 
-    completeEditPostActionCreator, deletePostActionCreator } from '../../../redux/profileReducer';
+import {
+    editPostActionCreator, onEditChangePostActionCreator,
+    completeEditPostActionCreator, deletePostActionCreator
+} from '../../../redux/profileReducer';
 import Post from './Post';
+import StoreContext from '../../../StoreContext';
 
 
 const PostContainer = (props) => {
@@ -13,49 +16,59 @@ const PostContainer = (props) => {
     const [styleEditBtn, setStyleEditBtn] = useState(s.editBtn);
     const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeBtn);
 
-    let editPost = () => {
-        setStyleTextArea(styleTextArea + ' ' + s.active); 
-        setStyleEditBtn(styleEditBtn + ' ' + s.active);
-        setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active);
-        props.store.dispatch(editPostActionCreator(props.index))
-    }
+    return (
+        <StoreContext.Consumer>
+            {
+                (store) => {
 
-    let onEditChange = (text) => {
-        props.store.dispatch(onEditChangePostActionCreator(text, props.index));
-    }
+                    let editPost = () => {
+                        setStyleTextArea(styleTextArea + ' ' + s.active);
+                        setStyleEditBtn(styleEditBtn + ' ' + s.active);
+                        setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active);
+                        store.dispatch(editPostActionCreator(props.index))
+                    }
 
-    let completeEdit = () => {
-        setStyleTextArea(s.editText);
-        setStyleEditBtn(s.editBtn);
-        setStyleCompleteBtn(s.completeBtn);
-        props.store.dispatch(completeEditPostActionCreator(props.index));
-    }
+                    let onEditChange = (text) => {
+                        store.dispatch(onEditChangePostActionCreator(text, props.index));
+                    }
 
-    let deletePost = () => {
-        props.store.dispatch(deletePostActionCreator(props.index));
-    }
+                    let completeEdit = () => {
+                        setStyleTextArea(s.editText);
+                        setStyleEditBtn(s.editBtn);
+                        setStyleCompleteBtn(s.completeBtn);
+                        store.dispatch(completeEditPostActionCreator(props.index));
+                    }
 
-    let onStylePostChange = () => {
-        setStyleItem(styleItem + ' ' + s.active);
-        setStyleText(styleText + ' ' + s.active);
-    }
+                    let deletePost = () => {
+                        store.dispatch(deletePostActionCreator(props.index));
+                    }
+
+                    let onStylePostChange = () => {
+                        setStyleItem(styleItem + ' ' + s.active);
+                        setStyleText(styleText + ' ' + s.active);
+                    }
 
 
-    return (<Post editPostCont={editPost}
-        onEditChangeCont={onEditChange}
-        completeEditCont={completeEdit}
-        deletePostCont={deletePost}
-        onStylePostChange={onStylePostChange}
-        value={props.store.getState().profilePage.posts[props.index].editPostText}
-        message={props.message}
-        likeCount={props.likeCount}
-        time={props.time}
-        styleItem={styleItem}
-        styleText={styleText}
-        styleTextArea={styleTextArea}
-        styleEditBtn={styleEditBtn}
-        styleCompleteBtn={styleCompleteBtn}
-    />
+                    return (
+                        <Post editPostCont={editPost}
+                            onEditChangeCont={onEditChange}
+                            completeEditCont={completeEdit}
+                            deletePostCont={deletePost}
+                            onStylePostChange={onStylePostChange}
+                            value={store.getState().profilePage.posts[props.index].editPostText}
+                            message={props.message}
+                            likeCount={props.likeCount}
+                            time={props.time}
+                            styleItem={styleItem}
+                            styleText={styleText}
+                            styleTextArea={styleTextArea}
+                            styleEditBtn={styleEditBtn}
+                            styleCompleteBtn={styleCompleteBtn}
+                        />
+                    )
+                }
+            }
+        </StoreContext.Consumer>
     );
 };
 

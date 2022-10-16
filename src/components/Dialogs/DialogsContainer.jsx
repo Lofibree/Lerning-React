@@ -8,49 +8,42 @@ import { useState } from 'react';
 
 
 
+const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeAddDialogBtn)
+const [styleAddDialog, setStyleAddDialog] = useState(s.newAddDialogText)
 
-const DialogsContainer = (props) => {
 
-    // debugger;
-
-    const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeAddDialogBtn)
-    const [styleAddDialog, setStyleAddDialog] = useState(s.newAddDialogText)
-
-    // debugger;
-
-    let addDialogInit = () => {
-        // debugger;
-        setStyleAddDialog(styleAddDialog + ' ' + s.active);
-        setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active)
+let mapStateToProps = (state) => {
+    return {
+        dialogsEl: state.messagePage.dialogs
+            .map(d => <NavLink to={'/dialogs/' + d.id} className={s.person}>
+                <DialogListItem name={d.name} id={d.id} />
+            </NavLink>
+            ),
+        value: state.messagePage.newAddDialogText,
+        styleCompleteBtn: styleCompleteBtn,
+        styleAddDialog: styleAddDialog
     }
-
-    let onChangeAddDialog = (text) => {
-        // debugger;
-        props.store.dispatch(onAddDialogChangeActionCreator(text))
+}
+let mapDispatchToProps = (dispatch) => {
+    return {
+        addDialogInitCont: () => {
+            setStyleAddDialog(styleAddDialog + ' ' + s.active);
+            setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active)
+        },
+        onChangeAddDialogCont: (text) => {
+            dispatch(onAddDialogChangeActionCreator(text))
+        },
+        completeNameWriteCont: (text) => {
+            dispatch(addDialogActionCreator(text));
+            setStyleAddDialog(s.newAddDialogText);
+            setStyleCompleteBtn(s.completeAddDialogBtn);
+        },
     }
+}
 
-    let completeNameWrite = (text) => {
-        props.store.dispatch(addDialogActionCreator(text));
-        setStyleAddDialog(s.newAddDialogText);
-        setStyleCompleteBtn(s.completeAddDialogBtn);
-    }
 
-    let dialogsEl = props.store.getState().messagePage.dialogs
-        .map(d => <NavLink to={'/dialogs/' + d.id} className={s.person}>
-            <DialogListItem name={d.name} id={d.id} />
-        </NavLink>
-        );
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
-    return (<Dialogs
-        dialogsEl={dialogsEl}
-        addDialogInitCont={addDialogInit}
-        onChangeAddDialogCont={onChangeAddDialog}
-        completeNameWriteCont={completeNameWrite}
-        value={props.store.getState().messagePage.newDialogText}
-        styleCompleteBtn={styleCompleteBtn}
-        styleAddDialog={styleAddDialog}
-    />
-    );
-};
+
 
 export default DialogsContainer;
