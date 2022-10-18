@@ -5,7 +5,6 @@ const UPDATE_EDIT_MESS_TEXT = 'UPDATE-EDIT-MESS-TEXT';
 const UPDATE_EDIT_MESS_INIT = 'UPDATE-EDIT-MESS-INIT';
 const COMPLETE_MESS_EDIT = 'COMPLETE-MESS-EDIT';
 const ADD_DIALOG = 'ADD-DIALOG';
-const COMPLETE_ADD_DIALOG = 'COMPLETE-ADD-DIALOG';
 const UPDATE_ADD_DIALOG_TEXT ='UPDATE-ADD-DIALOG-TEXT';
 
 
@@ -24,12 +23,9 @@ let initialState = {
     ],
     newMessText: 'type mess',
     dialogs: [
-        // { id: 0, name: 'Sergey' },
         { id: 0, name: 'lofi', href: 'https://vk.com/lofibree' },
-        // { id: 2, name: 'seva' },
         { id: 1, name: 'rock', href: 'https://vk.com/rockkom21' },
         { id: 2, name: 'seva', href: 'https://vk.com/rockkom21' },
-        // { id: 4, name: 'dggnjsdx' }
     ],
     newDialogText: 'add name'
 }
@@ -41,52 +37,83 @@ const messagesReducer = (state = initialState, action) => {
 
 // debugger;
 // debugger;
+
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             let newMess = {
                 id: action.id + 1,
                 message: state.newMessText,
                 time: action.timeMess,  // TIME MANAGEMENT
                 ownerDialog: state.dialogs[action.id].name
+            }
+            return {
+                ...state,
+                messagesBank: [...state.messagesBank, newMess],
+                newMessText: ''
             };
-            state.messagesBank.push(newMess);
-            state.newMessText = '';
-            return state;
+        }
+        case UPDATE_NEW_MESS_TEXT: {
+            return {
+                ...state,
+                newMessText: action.newText
+            };
+        }
+        case DELETE_MESS: {
+            let stateCopy = {...state};
+            stateCopy.messagesBank = [...state.messagesBank];
+            stateCopy.messagesBank[action.index] = {...state.messagesBank[action.index]}; // ВАЩЕ ХЗ, УДАЛЯЕТ ЛИ SPLICE ОБЪЕКТ ИЛИ ССЫЛКУ НА ОБЪЕКТ
+            stateCopy.messagesBank.splice(action.index, 1);
+            return stateCopy;
+        }
+        case UPDATE_EDIT_MESS_TEXT: {
+            // debugger;
 
-        case UPDATE_NEW_MESS_TEXT:
-            state.newMessText = action.newText;
-            return state;
-
-        case DELETE_MESS:
-            state.messagesBank.splice(action.index, 1);
-            return state;
-
-        case UPDATE_EDIT_MESS_TEXT:
-            state.messagesBank[action.index].editMessText = action.newText;
-            return state;
-
-        case UPDATE_EDIT_MESS_INIT:
-            state.messagesBank[action.index].editMessText = state.messagesBank[action.index].message;
-            return state;
-
-        case COMPLETE_MESS_EDIT:
-            state.messagesBank[action.index].message = state.messagesBank[action.index].editMessText;
-            return state;
-        case ADD_DIALOG:
-            let isDialogExist = state.dialogs.some(d => d.name === state.newDialogText);
+            let stateCopy = {...state};
+            stateCopy.messagesBank = [...state.messagesBank];
+            stateCopy.messagesBank[action.index] = {...state.messagesBank[action.index]};
+            stateCopy.messagesBank[action.index].editMessText = action.newText;
+            return stateCopy;
+        }
+        case UPDATE_EDIT_MESS_INIT: {
+            // debugger;
+            
+            let stateCopy = {...state};
+            stateCopy.messagesBank = [...state.messagesBank];
+            stateCopy.messagesBank[action.index] = {...state.messagesBank[action.index]};
+            stateCopy.messagesBank[action.index].editMessText = stateCopy.messagesBank[action.index].message;
+            return stateCopy;
+        }
+        case COMPLETE_MESS_EDIT: {
+            // debugger;
+            let stateCopy = {...state};
+            stateCopy.messagesBank = [...state.messagesBank];
+            stateCopy.messagesBank[action.index] = {...state.messagesBank[action.index]};
+            stateCopy.messagesBank[action.index].message = stateCopy.messagesBank[action.index].editMessText;
+            return stateCopy;
+        }
+        case ADD_DIALOG: {
+            let stateCopy = {...state};
+            stateCopy.dialogs = [...state.dialogs];
+            // stateCopy.dialogs = [...state.dialogs].map(function (d) {return {...d}});  // СОМНИТЕЛЬНО, ВЕДЬ Я ЖЕ НЕ ИЗМЕНЯЮ, А ЧИТАЮ
+            let isDialogExist = stateCopy.dialogs.some(d => d.name === stateCopy.newDialogText);
             if (isDialogExist === false) {
                 let newDialog = {
-                    id: state.dialogs.length, 
-                    name: state.newDialogText,
+                    id: stateCopy.dialogs.length, 
+                    name: stateCopy.newDialogText,
                 }
-            state.dialogs.push(newDialog);
+                stateCopy.dialogs.push(newDialog);
+                stateCopy.newDialogText = '';
             } else {
                 window.alert('This dialog already exist')
             }
-            return state;
-        case UPDATE_ADD_DIALOG_TEXT:
-            state.newDialogText = action.newText;
-            return state;
+            return stateCopy;
+        }
+        case UPDATE_ADD_DIALOG_TEXT: {
+            return {
+                ...state,
+                newDialogText: action.newText
+            };
+        }
         default:
             return state;
 

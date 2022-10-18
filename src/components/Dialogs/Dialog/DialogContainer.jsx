@@ -4,60 +4,48 @@ import { useParams } from 'react-router-dom';
 import { onMessChangeActionCreator, addMessActionCreator } from '../../../redux/messagesReducer';
 import MessageContainer from '../Message/MessageContainer';
 import Dialog from './Dialog';
-import StoreContext from '../../../StoreContext';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+
 
 const DialogContainer = (props) => {
-    // console.log(useParams());
     const { id } = useParams();
-
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+    const index = useSelector(state => state.messagePage.messagesBank);
+    let dialog = useSelector(state => state.messagePage.dialogs[id].name);
+    let messagesBankUse = useSelector(state => state.messagePage.messagesBank);
     // debugger;
 
+    let getDialogName = () => {
+        let messagesOfDialog = messagesBankUse.filter(m => m.ownerDialog == dialog);
+        return messagesOfDialog;
+    }
 
+    let onMessChange = (text) => {
+        dispatch(onMessChangeActionCreator(text))
+    }
 
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
+    let addMess = (timeMesse) => {
+        // debugger;
+        dispatch(addMessActionCreator(timeMesse, id));
+    }
+    // debugger;
 
-                    let getDialogName = () => {
-                        // let emptyArr = [];
-                        let dialog = store.getState().messagePage.dialogs[id].name;
-                        let messagesOfDialog = store.getState().messagePage.messagesBank.filter(m => m.ownerDialog == dialog);
-                        // debugger;
+    let messageEl = getDialogName().map(m => <MessageContainer
+            title={m.message}
+            time={m.time}
+            index={index.indexOf(m)}
+        />
+        );
 
-                        return messagesOfDialog;
-                    }
-
-                    let onMessChange = (text) => {
-                        store.dispatch(onMessChangeActionCreator(text))
-                    }
-
-                    let addMess = (timeMesse) => {
-                        // debugger;
-                        store.dispatch(addMessActionCreator(timeMesse, id));
-                    }
-
-                    // debugger;
-
-                    let messageEl = getDialogName().map(m => <MessageContainer
-                        title={m.message}
-                        time={m.time}
-                        index={store.getState().messagePage.messagesBank.indexOf(m)}
-                    />
-                    );
-
-                    return (
-                        <Dialog
-                            name={store.getState().messagePage.dialogs[id].name}
-                            onMessChangeCont={onMessChange}
-                            addMessCont={addMess}
-                            value={store.getState().messagePage.newMessText}
-                            messageEl={messageEl}
-                        />
-                    )
-                }
-            }
-        </StoreContext.Consumer>
+    return (<Dialog
+        name={state.messagePage.dialogs[id].name}
+        onMessChangeCont={onMessChange}
+        addMessCont={addMess}
+        value={state.messagePage.newMessText}
+        messageEl={messageEl}
+    />
     );
 };
 

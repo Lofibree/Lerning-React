@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './Dialogs.module.css';
 import { AiOutlineUserAdd, AiOutlineCheck } from 'react-icons/ai'
 
@@ -7,11 +7,19 @@ import { AiOutlineUserAdd, AiOutlineCheck } from 'react-icons/ai'
 
 const Dialogs = (props) => {
 
+
+    const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeAddDialogBtn)
+    const [styleAddDialog, setStyleAddDialog] = useState(s.newAddDialogText)
+
+
+
     let nameNewDialogEl = React.createRef();
 
     let addDialogInit = () => {
+        setStyleAddDialog(styleAddDialog + ' ' + s.active);
+        setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active)
         // debugger;
-        props.addDialogInitCont();
+        // props.addDialogInitCont();
     }
 
     let onChangeAddDialog = () => {
@@ -24,6 +32,8 @@ const Dialogs = (props) => {
         if (text !== '') {
             props.completeNameWriteCont();
         }
+        setStyleAddDialog(s.newAddDialogText);
+        setStyleCompleteBtn(s.completeAddDialogBtn);
     }
 
     return (
@@ -32,14 +42,14 @@ const Dialogs = (props) => {
             <div>
                 <div className={s.newMessBox}>
                     <AiOutlineUserAdd className={s.addDialogBtn} onClick={addDialogInit} />
-                    <textarea ref={nameNewDialogEl} className={props.styleAddDialog} value={props.value} onChange={onChangeAddDialog}/>
+                    <textarea ref={nameNewDialogEl} className={styleAddDialog} value={props.value} onChange={onChangeAddDialog} />
                     <AiOutlineCheck
-                        className={props.styleCompleteBtn} 
+                        className={styleCompleteBtn}
                         onClick={completeNameWrite}
                     />
                 </div>
             </div>
-            
+
         </div>
     );
 };

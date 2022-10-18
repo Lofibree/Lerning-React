@@ -1,7 +1,7 @@
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_POST_INIT = 'UPDATE-EDIT-POST-INIT';
+const UPDATE_EDIT_POST_INIT = 'UPDATE-EDIT-POST-INIT';
 const UPDATE_EDIT_POST_TEXT = 'UPDATE-EDIT-POST-TEXT';
 const COMPLETE_POST_EDIT = 'COMPLETE-POST-EDIT';
 const DELETE_POST = 'DELETE-POST';
@@ -24,37 +24,69 @@ const profileReducer = (state = initialState, action) => {
     // debugger;
 
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
+            // let stateCopy = {...state};
+            // stateCopy.posts = [...state.posts];
+            // let newPost = {
+            //     id: 5,
+            //     message: stateCopy.newPostText,
+            //     likeCount: 0,
+            //     time: action.time // TIME MANAGEMENT
+            // };
+            // stateCopy.posts.push(newPost);
+            // stateCopy.newPostText = '';
+            // return stateCopy;
+            // let newPostTextVar = state.newPostText;
             let newPost = {
-                id: 5,
+                id: state.posts.length,
                 message: state.newPostText,
                 likeCount: 0,
-                time: action.time // TIME MANAGEMENT
+                time: action.time
+            }
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
+            }
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
-
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
-
-        case UPDATE_NEW_POST_INIT:
-            state.posts[action.index].editPostText = state.posts[action.index].message;
-            return state;
-
-        case UPDATE_EDIT_POST_TEXT:
-            state.posts[action.index].editPostText = action.newText;
-            return state;
-
-        case COMPLETE_POST_EDIT:
-            state.posts[action.index].message = state.posts[action.index].editPostText;
-            state.editPostText = '';
-            return state;
-
-        case DELETE_POST:
-            state.posts.splice(action.index, 1);
-            return state;
+            // stateCopy.newPostText = action.newText;
+        }
+        case UPDATE_EDIT_POST_INIT: {
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts[action.index] = {...state.posts[action.index]};
+            stateCopy.posts[action.index].editPostText = stateCopy.posts[action.index].message;
+            // window.alert(stateCopy.posts[action.index].editPostText);
+            // window.alert(state.posts[action.index].editPostText);
+            return stateCopy;
+        }
+        case UPDATE_EDIT_POST_TEXT: {
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts[action.index] = {...state.posts[action.index]};
+            stateCopy.posts[action.index].editPostText = action.newText;
+            return stateCopy;
+        }
+        case COMPLETE_POST_EDIT: {
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts[action.index] = {...state.posts[action.index]};
+            stateCopy.posts[action.index].message = stateCopy.posts[action.index].editPostText;
+            stateCopy.editPostText = '';
+            return stateCopy;
+        }
+        case DELETE_POST: {
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts[action.index] = {...state.posts[action.index]};
+            stateCopy.posts.splice(action.index, 1);
+            return stateCopy;
+        }
         default:
             return state;
 
@@ -62,10 +94,12 @@ const profileReducer = (state = initialState, action) => {
 
 }
 
+//  ВАЩЕ ХЗ КОНЕЧНО С ЭТИМИ КОПИРОВАНИЯМИ - НАДО ЛИ ИХ ДЕЛАТЬ НА КАЖДЫЙ ЧИХ ИЛИ НЕТ?
+
 
 export const addPostActionCreator = (timeMesse) => ({ type: ADD_POST, time: timeMesse });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
-export const editPostActionCreator = (index) => ({ type: UPDATE_NEW_POST_INIT, index: index });
+export const editPostActionCreator = (index) => ({ type: UPDATE_EDIT_POST_INIT, index: index });
 export const onEditChangePostActionCreator = (text, index) => ({ type: UPDATE_EDIT_POST_TEXT, newText: text, index: index });
 export const completeEditPostActionCreator = (index) => ({ type: COMPLETE_POST_EDIT, index: index });
 export const deletePostActionCreator = (index) => ({ type: DELETE_POST, index: index });

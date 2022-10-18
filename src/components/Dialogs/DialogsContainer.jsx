@@ -5,11 +5,12 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import Dialogs from './Dialogs';
 import { addDialogActionCreator, onAddDialogChangeActionCreator } from '../../redux/messagesReducer';
 import { useState } from 'react';
+import { connect } from 'react-redux/es/exports';
 
 
 
-const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeAddDialogBtn)
-const [styleAddDialog, setStyleAddDialog] = useState(s.newAddDialogText)
+// const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeAddDialogBtn)
+// const [styleAddDialog, setStyleAddDialog] = useState(s.newAddDialogText)
 
 
 let mapStateToProps = (state) => {
@@ -19,24 +20,24 @@ let mapStateToProps = (state) => {
                 <DialogListItem name={d.name} id={d.id} />
             </NavLink>
             ),
-        value: state.messagePage.newAddDialogText,
-        styleCompleteBtn: styleCompleteBtn,
-        styleAddDialog: styleAddDialog
+        value: state.messagePage.newDialogText,
+        // styleCompleteBtn: styleCompleteBtn,
+        // styleAddDialog: styleAddDialog
     }
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        addDialogInitCont: () => {
-            setStyleAddDialog(styleAddDialog + ' ' + s.active);
-            setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active)
-        },
+        // addDialogInitCont: () => {
+        //     setStyleAddDialog(styleAddDialog + ' ' + s.active);
+        //     setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active)
+        // },
         onChangeAddDialogCont: (text) => {
             dispatch(onAddDialogChangeActionCreator(text))
         },
         completeNameWriteCont: (text) => {
             dispatch(addDialogActionCreator(text));
-            setStyleAddDialog(s.newAddDialogText);
-            setStyleCompleteBtn(s.completeAddDialogBtn);
+            // setStyleAddDialog(s.newAddDialogText);
+            // setStyleCompleteBtn(s.completeAddDialogBtn);
         },
     }
 }
