@@ -18,8 +18,6 @@ const Dialogs = (props) => {
     let addDialogInit = () => {
         setStyleAddDialog(styleAddDialog + ' ' + s.active);
         setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active)
-        // debugger;
-        // props.addDialogInitCont();
     }
 
     let onChangeAddDialog = () => {

@@ -15,8 +15,11 @@
     background-color: #21438C;
     padding: 7px;
     font-size: 24px;
-    display: grid;
-    grid-template-rows: 1fr 10fr ;
+    /* display: grid;
+    grid-template-rows: 1fr 10fr ; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
 }
 
 .nav a {
@@ -37,34 +40,10 @@ a.activeLink {
     font-size: 26px;
 }
 
-/* a:focus {
-    box-shadow: rgb(0 0 0 / 50%);
-} */
-/* (navigationData) => navigationData.isActive
-                        ? s.activeLink
-                        : null */
-
-/* .navLink{
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-
-}
-.navLink:focus{
-    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
-    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
-    color: gold;
-    font-weight: bold;
-    padding: 5px;
-    margin-top: 20px;
-    margin: 5px;
-} */
-
 .friendsEl {
-    /* position: relative;
-    bottom: 50px; */
-    position: fixed;
-    top: 100px;
+    /* position: fixed;
+    top: 300px; */
+    margin-top: 100%;
 }
 
 .friends {
@@ -72,7 +51,6 @@ a.activeLink {
     justify-content: space-between;
     align-items: center;
 }
-
 
 .friends img {
     width: 3.5rem;

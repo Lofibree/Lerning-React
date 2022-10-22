@@ -25,18 +25,6 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST: {
-            // let stateCopy = {...state};
-            // stateCopy.posts = [...state.posts];
-            // let newPost = {
-            //     id: 5,
-            //     message: stateCopy.newPostText,
-            //     likeCount: 0,
-            //     time: action.time // TIME MANAGEMENT
-            // };
-            // stateCopy.posts.push(newPost);
-            // stateCopy.newPostText = '';
-            // return stateCopy;
-            // let newPostTextVar = state.newPostText;
             let newPost = {
                 id: state.posts.length,
                 message: state.newPostText,
@@ -54,15 +42,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.newText
             };
-            // stateCopy.newPostText = action.newText;
         }
         case UPDATE_EDIT_POST_INIT: {
             let stateCopy = {...state};
             stateCopy.posts = [...state.posts];
             stateCopy.posts[action.index] = {...state.posts[action.index]};
             stateCopy.posts[action.index].editPostText = stateCopy.posts[action.index].message;
-            // window.alert(stateCopy.posts[action.index].editPostText);
-            // window.alert(state.posts[action.index].editPostText);
             return stateCopy;
         }
         case UPDATE_EDIT_POST_TEXT: {
