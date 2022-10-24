@@ -1,14 +1,19 @@
+* {
+  box-sizing: border-box;
+}
 
 body {
   /* background-image: url(https://sun1-26.userapi.com/impg/RHx_4HMDlJ-4JWjesGWfcRU_PR2yBEn63lr2Cg/jwOC-qzcAws.jpg?size=1280x720&quality=96&sign=73c51a28d40f7d76d5ee89f8dcac0e46&type=album); */
   background-color: steelblue;
   background-repeat: no-repeat;
-  background-size:cover;
-  background-attachment:fixed;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
 .app-wrapper {
   display: grid;
-  max-width: 800px;
+  width: 800px;
+  box-sizing: border-box;
   margin: 10px auto;
   padding: 10px;
   border-radius: 10px;
@@ -23,18 +28,6 @@ body {
   grid-template-columns: 3fr 8fr;
   grid-gap: 10px;
 
-  /* background-color: #b6c9ff; */
-  /* background-image: url(https://sun1-26.userapi.com/impg/RHx_4HMDlJ-4JWjesGWfcRU_PR2yBEn63lr2Cg/jwOC-qzcAws.jpg?size=1280x720&quality=96&sign=73c51a28d40f7d76d5ee89f8dcac0e46&type=album); */
   background-color: rgb(86, 107, 124);
-  /* background-repeat: no-repeat;
-  background-size:cover;
-  background-attachment:fixed; */
 
 }
-
-/* .app-wrapper-content {
-
-  grid-area: c;
-  background-color: aqua;
-
-} */

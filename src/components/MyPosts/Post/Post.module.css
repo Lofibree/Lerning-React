@@ -25,7 +25,7 @@
 
 .item:hover {
     background-color: rgb(69, 69, 128);
-    cursor: pointer;
+    /* cursor: pointer; */
     border-radius: 10px;
     -webkit-box-shadow: 0 15px 25px 0 rgb(0 0 0 / 50%);
     box-shadow: 0 15px 25px 0 rgb(0 0 0 / 50%);
@@ -41,7 +41,10 @@
     display: flex;
     align-items: center;
 }
-
+.postId {
+    margin: 5px;
+    margin-right: 10px;
+}
 .headerPost img {
     width: 55px;
     height: 55px;
@@ -56,7 +59,6 @@
 }
 
 .headerPost .postAuthor:hover {
-    text-decoration: underline;
     transition: 0.2s ease;
 }
 
@@ -64,7 +66,7 @@
 
 .mainPost {
     display: grid;
-    grid-template-columns: 3fr 1fr 60px;
+    grid-template-columns: 1fr 60px;
     grid-gap: 10px;
 }
 .time {
@@ -115,7 +117,7 @@
 .postText {
     font-size: 19px;
     font-weight: 600;
-    min-width: 112px;
+    min-width: 240px;
     color:rgb(213, 118, 118);
     margin: 25px auto;
     word-break: break-all;
@@ -160,6 +162,18 @@
 .likes:hover {
     cursor: pointer;
     background-image: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2));
+    transition: 0.2s ease;
+    color: white;
+}
+
+.commentsLink {
+    width:min-content;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+.commentsLink:hover {
+    cursor: pointer;
     transition: 0.2s ease;
     color: white;
 }

@@ -9,9 +9,9 @@ const ProfileInfo = () => {
           // className={s.mainImg}
           />
         </div>
-        <div className={s.descriptionBlock}>
+        {/* <div className={s.descriptionBlock}>
 
-        </div>
+        </div> */}
     </div>
   );
 };

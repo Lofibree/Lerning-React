@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import s from './Post.module.css';
 import { editPostActionCreator, onEditChangePostActionCreator, 
-    completeEditPostActionCreator, deletePostActionCreator } from '../../../redux/profileReducer';
+    completeEditPostActionCreator, deletePostAC } from '../../../redux/profileReducer';
 import Post from './Post';
-import { useStore } from 'react-redux/es/hooks/useStore';
+import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import axios from 'axios';
+
+
+
+
+// class PostAJAX extends React.Component {
+//     constructor(props) {super(props)}
+
+
+// }
+
+
+
+
+
 
 const PostContainer = (props) => {
 
@@ -13,29 +29,30 @@ const PostContainer = (props) => {
     const [styleEditBtn, setStyleEditBtn] = useState(s.editBtn);
     const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeBtn);
 
-    const store = useStore();
-
+    const dispatch = useDispatch();
+    const editPostText = useSelector(state => state.profilePage.posts[props.index].editPostText)
+    // const comments = useSelector(state => state.profilePage.posts.)
 
     let editPost = () => {
         setStyleTextArea(styleTextArea + ' ' + s.active); 
         setStyleEditBtn(styleEditBtn + ' ' + s.active);
         setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active);
-        store.dispatch(editPostActionCreator(props.index))
+        dispatch(editPostActionCreator(props.index))
     }
 
     let onEditChange = (text) => {
-        store.dispatch(onEditChangePostActionCreator(text, props.index));
+        dispatch(onEditChangePostActionCreator(text, props.index));
     }
 
     let completeEdit = () => {
         setStyleTextArea(s.editText);
         setStyleEditBtn(s.editBtn);
         setStyleCompleteBtn(s.completeBtn);
-        store.dispatch(completeEditPostActionCreator(props.index));
+        dispatch(completeEditPostActionCreator(props.index));
     }
 
     let deletePost = () => {
-        store.dispatch(deletePostActionCreator(props.index));
+        dispatch(deletePostAC(props.id));
     }
 
     let onStylePostChange = () => {
@@ -49,10 +66,12 @@ const PostContainer = (props) => {
         completeEditCont={completeEdit}
         deletePostCont={deletePost}
         onStylePostChange={onStylePostChange}
-        value={store.getState().profilePage.posts[props.index].editPostText}
-        message={props.message}
-        likeCount={props.likeCount}
-        time={props.time}
+        value={editPostText}
+        body={props.body}
+        title={props.title}
+        id={props.id}
+        // likeCount={props.likeCount}
+        // time={props.time}
         styleItem={styleItem}
         styleText={styleText}
         styleTextArea={styleTextArea}

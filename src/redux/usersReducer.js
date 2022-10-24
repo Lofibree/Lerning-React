@@ -6,6 +6,7 @@ const SET_USERS_IMG = 'SET-USERS-IMG';
 const COMBINE_USER_AND_IMG = 'COMBINE-USER-AND-IMG';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 
 let initialState = {
@@ -13,7 +14,8 @@ let initialState = {
     usersImgBank: [],
     pageSize: 20,
     totalUsersCount: 0,
-    currentPage: 3
+    currentPage: 3,
+    isFetching: false
 }
 
 
@@ -35,11 +37,12 @@ const usersReduser = (state = initialState, action) => {
 
             return stateCopy;
         }
-        case SET_USERS:
+        case SET_USERS: {
             return { 
                 ...state, 
                 usersBank: action.newUsers
             }
+        }
         case SET_USERS_IMG: {
             let stateCopy = {
                 ...state,
@@ -80,7 +83,12 @@ const usersReduser = (state = initialState, action) => {
                 currentPage: action.currentPage
             }
         }
-
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
 
         default:
             return state;
@@ -96,5 +104,6 @@ export const setUsersImgAC = (usersImg) => ({ type: SET_USERS_IMG, usersImg: use
 export const combineUserAndImgAC = () => ({ type: COMBINE_USER_AND_IMG })
 export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage})
 export const setTotalUsersCountAC = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
+export const setIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 
-export default usersReduser;
+export default usersReduser; 

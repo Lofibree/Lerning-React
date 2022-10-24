@@ -5,17 +5,25 @@ const UPDATE_EDIT_POST_INIT = 'UPDATE-EDIT-POST-INIT';
 const UPDATE_EDIT_POST_TEXT = 'UPDATE-EDIT-POST-TEXT';
 const COMPLETE_POST_EDIT = 'COMPLETE-POST-EDIT';
 const DELETE_POST = 'DELETE-POST';
-
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_POSTS = 'SET_POSTS';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const SET_COMMENTS = 'SET_COMMENTS';
+const TOGGLE_IS_FETCHING_COMM = 'TOGGLE_IS_FETCHING_COMM';
 
 
 let initialState = {
     posts: [
-        { id: 0, message: 'Hi, how are you', editPostText: 'edit post', likeCount: 12, time: '08:57'  },
-        { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '08:55' },
-        { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '08:54' },
-        { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '07:57' },
-        { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '02:53' },
+        // { id: 0, message: 'Hi, how are you', editPostText: 'edit post', likeCount: 12, time: '08:57'  },
+        // { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '08:55' },
+        // { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '08:54' },
+        // { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '07:57' },
+        // { id: 1, message: 'It is my first post', editPostText: 'edit post', likeCount: 11, time: '02:53' },
     ],
+    comments: [],
+    currentPage: 1,
+    isFetching: true,
+    isFetchingComm: true,
     newPostText: 'it-kamasutra',
 }
 
@@ -66,11 +74,46 @@ const profileReducer = (state = initialState, action) => {
             return stateCopy;
         }
         case DELETE_POST: {
+            // debugger;
             let stateCopy = {...state};
             stateCopy.posts = [...state.posts];
-            stateCopy.posts[action.index] = {...state.posts[action.index]};
-            stateCopy.posts.splice(action.index, 1);
+            let postToDelete = stateCopy.posts.find(post => post.id === action.id);
+            let neededIndex = stateCopy.posts.indexOf(postToDelete);
+            stateCopy.posts[neededIndex] = {...state.posts[neededIndex]};
+            stateCopy.posts.splice(neededIndex, 1);
             return stateCopy;
+        }
+        case SET_CURRENT_PAGE: {
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        }
+        case SET_POSTS: {
+            return {
+                ...state,
+                posts: action.newPosts
+            }
+        }
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
+        case SET_COMMENTS: {
+            // debugger;
+            return {
+                ...state,
+                comments: action.newComments
+            }
+        }
+        case TOGGLE_IS_FETCHING_COMM: {
+            // debugger;
+            return {
+                ...state,
+                isFetchingComm: action.isFetchingComm
+            }
         }
         default:
             return state;
@@ -82,13 +125,18 @@ const profileReducer = (state = initialState, action) => {
 //  ВАЩЕ ХЗ КОНЕЧНО С ЭТИМИ КОПИРОВАНИЯМИ - НАДО ЛИ ИХ ДЕЛАТЬ НА КАЖДЫЙ ЧИХ ИЛИ НЕТ?
 
 
-export const addPostActionCreator = (timeMesse) => ({ type: ADD_POST, time: timeMesse });
-export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
+export const addPost = (timeMesse) => ({ type: ADD_POST, time: timeMesse });
+export const updateNewPostText = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
 export const editPostActionCreator = (index) => ({ type: UPDATE_EDIT_POST_INIT, index: index });
 export const onEditChangePostActionCreator = (text, index) => ({ type: UPDATE_EDIT_POST_TEXT, newText: text, index: index });
 export const completeEditPostActionCreator = (index) => ({ type: COMPLETE_POST_EDIT, index: index });
-export const deletePostActionCreator = (index) => ({ type: DELETE_POST, index: index });
+export const deletePostAC = (id) => ({ type: DELETE_POST, id });
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage})
+export const setPosts = (newPosts) => ({ type: SET_POSTS, newPosts })
+export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const setCommentsAC = (newComments) => ({ type: SET_COMMENTS, newComments })
+export const setIsFetchingCommAC = (isFetchingComm) => ({ type: TOGGLE_IS_FETCHING_COMM, isFetchingComm })
 
 
 
-export default profileReducer;
+export default profileReducer; 
