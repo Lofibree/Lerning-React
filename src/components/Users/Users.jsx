@@ -19,7 +19,11 @@ const Users = (props) => {
                         if (p <= 10) {
                             return (
                                 <span
-                                    className={props.currentPage === p && s.selectedPage}
+                                    className={
+                                        props.currentPage === p
+                                            ? s.selectedPage
+                                            : undefined
+                                    }
                                     onClick={() => {
                                         props.onPageChanged(p)
                                     }}

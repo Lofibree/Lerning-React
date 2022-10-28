@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import UserItem from './UserItem';
-import { followUnFollowAC, setUsersAC, setUsersImgAC, combineUserAndImgAC, setCurrentPageAC, setTotalUsersCountAC, setIsFetchingAC } from '../../redux/usersReducer';
+import UserItemContainer from './UserItemContainer';
+import { setUsersAC, setCurrentPageAC, setTotalUsersCountAC, setIsFetchingAC } from '../../redux/usersReducer';
 import { useDispatch } from 'react-redux';
 import Users from './Users';
-import axios from 'axios'
+import { usersAPI } from '../api/api';
 import Preloader from '../common/Preloader/Preloader';
 
 
@@ -16,16 +16,11 @@ class UsersAJAX extends React.Component {
 
     componentDidMount() {
         this.props.setIsFetchingCont(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-            .then(response => {
+        usersAPI.setUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
                 this.props.setIsFetchingCont(false);
-                this.props.setUsersCont(response.data.items);
-                this.props.setTotalUsersCountCont(response.data.totalCount);
-            })
-
-        axios.get(`https://jsonplaceholder.typicode.com/photos?_limit=${this.props.pageSize}&_page=${this.props.currentPage}`)
-            .then(response => {
-                this.props.setUsersImgCont(response.data)
+                this.props.setUsersCont(data.items);
+                this.props.setTotalUsersCountCont(data.totalCount);
             })
     }
 
@@ -35,17 +30,11 @@ class UsersAJAX extends React.Component {
         this.props.setIsFetchingCont(true);
         this.props.setCurrentPageCont(pageNumber);
         
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
-        .then(response => {
+        usersAPI.onPageSetUsers(this.props.pageSize, pageNumber)
+        .then(data => {
             this.props.setIsFetchingCont(false);
-            this.props.setUsersCont(response.data.items);
+            this.props.setUsersCont(data.items);
         })
-
-        axios.get(`https://jsonplaceholder.typicode.com/photos?_limit=${this.props.pageSize}&_page=${this.props.pageNumber}`)
-            .then(response => {
-                this.props.setUsersImgCont(response.data)
-            })
-            // debugger;
     }
 
 
@@ -80,18 +69,14 @@ const UsersContainer = () => {
     const isFetching = useSelector(state => state.usersPage.isFetching);
 
 
-    const onClickFollowUnFollow = (id) => {
-        dispatch(followUnFollowAC(id));
-    }
+    // const onClickFollowUnFollow = (id) => {
+    //     dispatch(followUnFollowAC(id));
+    // }
     const setUsers = (newUsers) => {
         dispatch(setUsersAC(newUsers))
     }
     const setTotalUsersCount = (totalCount) => {
         dispatch(setTotalUsersCountAC(totalCount))
-    }
-    const setUsersImg = (usersImg) => {
-        dispatch(setUsersImgAC(usersImg));
-        dispatch(combineUserAndImgAC());
     }
     const setCurrentPage = (currentPage) => {
         dispatch(setCurrentPageAC(currentPage))
@@ -102,14 +87,13 @@ const UsersContainer = () => {
 
     const usersItemsEl = users
         .map(u => 
-            <UserItem name={u.name}
+            <UserItemContainer name={u.name}
                 id={u.id}
                 status={u.status}
                 photo={u.photos.small}
-                onClickFollowUnFollowCont={onClickFollowUnFollow}
-                isFollowed={u.followed
-                    ? 'Unfollow'
-                    : 'Follow'}
+                // isFollowed={u.followed
+                //     ? 'Unfollow'
+                //     : 'Follow'}
             />
         );
 
@@ -122,7 +106,6 @@ const UsersContainer = () => {
             isFetching={isFetching}
             setUsersCont={setUsers}
             setTotalUsersCountCont={setTotalUsersCount}
-            setUsersImgCont={setUsersImg}
             setCurrentPageCont={setCurrentPage}
             setIsFetchingCont={setIsFetching}
         />

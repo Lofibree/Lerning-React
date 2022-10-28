@@ -1,33 +1,39 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
-import userPhoto from '../../accets/images/creative.jpg';
+
+
+
+
 
 const UserItem = (props) => {
-
-
-    const onClickFollowUnFollow = () => {
-        props.onClickFollowUnFollowCont(props.id)
+    // debugger;
+    const onFollowClick = () => {
+        // debugger;
+        props.onFollowClick(props.id)
         // debugger;
     }
-
-    // const setParticularImg = () => {
-    //     props.setParticularImgCont(props.id)
-    // }
+    const onUnFollowClick = () => {
+        // debugger;
+        props.onUnFollowClick(props.id)
+        // debugger;
+    }
 
     return (
         <div className={s.item}>
             <div className={s.imgPlusFollow}>
-                <img
-                    src={props.photo !== null
-                        ? props.photo
-                        : userPhoto
-                    }
-                />
+                <NavLink to={'/users/' + props.id}>
+                    <img
+                        src={props.photo !== null
+                            ? props.photo
+                            : `https://picsum.photos/seed/${props.id}/200/300`
+                        } />
+                </NavLink>
                 <div>
-                    <button onClick={onClickFollowUnFollow}>
-                        {props.isFollowed}
-                    </button>
+                    {props.isFollowed
+                        ? <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={onUnFollowClick} >UnFollow</button>
+                        : <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={onFollowClick} >Follow</button>
+                    }
                 </div>
             </div>
             <div className={s.innerItem}>
@@ -36,12 +42,14 @@ const UserItem = (props) => {
                         <NavLink to={'/users/' + props.id}>{props.name}</NavLink>
                     </div>
                     <div className={s.location}>
-                        <div>{'props.location.city'},</div>
-                        <div>{'props.location.country'}</div>
+                        <div>Location: <br/>I'm citizen of the world</div>
                     </div>
                 </div>
-                <div className={s.status}>
-                    {props.status}
+                <div className={s.status}> 
+                    {props.status !== null
+                    ? props.status
+                    : <span className={s.statusDefault}>I don't know what to say</span>
+                    }
                 </div>
             </div>
         </div>

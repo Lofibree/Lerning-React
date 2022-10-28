@@ -1,0 +1,62 @@
+
+
+.user {
+    -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.userImgCard {
+    /* -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%); */
+    /* border-radius: 10px;
+    padding: 10px;
+    margin: 5px; */
+    width: 526px;
+    height: 300px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.usersId {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+}
+
+.userImgPlusName {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.userImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* margin-right: 50px; */
+}
+
+.userName {
+    color: #0E152D;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+.userName:hover {
+    cursor: pointer;
+    color: rgb(230, 88, 230);
+    transition: 0.2s ease;
+}
+.lookingForAJob {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* margin-left: 50px; */
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}

@@ -1,5 +1,4 @@
 import './App.css';
-import Header from './components/Layout/Header/Header';
 import Navbar from './components/Layout/Navbar/Navbar';
 import Footer from './components/Layout/Footer/Footer';
 import Profile from './components/MyPosts/Profile';
@@ -7,14 +6,17 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import { Route, Routes } from 'react-router-dom';
 import DialogContainer from './components/Dialogs/Dialog/DialogContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import CommentsContainer from './components/MyPosts/Comments/CommentsContainer';
+import PostPageContainer from './components/MyPosts/Post/PostPageContainer';
+import UserContainer from './components/Users/UserContainer/UserContainer';
+import HeaderContainer from './components/Layout/Header/HeaderContainer';
+
 
 const App = (props) => {
 
   return (
     <div className='body'>
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <Footer />
         <div className="app-content">
@@ -23,7 +25,7 @@ const App = (props) => {
               element={<Profile />}
             />
             <Route path='/profile/:id'
-              element={<CommentsContainer />}
+              element={<PostPageContainer />}
             />
             <Route path='/dialogs'
               element={<DialogsContainer />}
@@ -34,9 +36,9 @@ const App = (props) => {
             <Route path='/users'
               element={<UsersContainer />}
             />
-            {/* <Route path='/users/:id'
-              element={<UserProfile />}
-            /> */}
+            <Route path='/users/:id'
+              element={<UserContainer />}
+            />
           </Routes>
         </div>
       </div>

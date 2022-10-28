@@ -36,7 +36,7 @@ const MyPosts = (props) => {
             })
           }
         </div>
-        <div className={s.newPostBox}>
+        {/* <div className={s.newPostBox}>
           <textarea
             className={s.newPostText}
             onChange={onPostChange}
@@ -44,7 +44,7 @@ const MyPosts = (props) => {
             value={props.value}
           />
           <AiOutlineSend onClick={onAddPost} className={s.btnMess} />
-        </div>
+        </div> */}
         {props.postsEl}
       </div>
     </div>

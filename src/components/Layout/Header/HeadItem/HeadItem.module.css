@@ -11,6 +11,7 @@
     color: white;
     -webkit-box-shadow: 0 2px 5px 0 rgba(245, 119, 119, 0.5);
     box-shadow: 0 5px 10px 0 rgba(252, 118, 118, 0.5);
+    transition: 0.2s ease;
 }
 
 .item:hover {
@@ -20,4 +21,9 @@
     transition: 0.2s ease;
     -webkit-box-shadow: 0 2px 5px 0 rgba(245, 119, 119, 0.5);
     box-shadow: 0 10px 20px 0 rgba(252, 118, 118, 0.5);
+    transition: 0.2s ease;
+}
+.itemLogin{
+    font-size: 12px;
+    margin-right: 5px;
 }
