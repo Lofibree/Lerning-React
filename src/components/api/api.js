@@ -61,6 +61,13 @@ export const postsAPI = {
             return response.data
         })
     },
+    // deletePost(id) {
+    //     return instanseJSONPLACE.delete(`posts/${id}`)
+    //     .then(response => {
+    //         debugger;
+    //         return response.data
+    //     })
+    // },
 }
 
 export const usersAPI = {
@@ -91,7 +98,8 @@ export const usersAPI = {
     setUserProfile(userId) {
         return instanseSAMURAI.get(`profile/${userId}`)
         .then(response => {
+            // debugger;
             return response.data
         })
     }
-}
+} 

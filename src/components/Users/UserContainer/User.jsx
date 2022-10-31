@@ -1,52 +1,31 @@
 import React from 'react';
-import ProfileStatusContainer from '../../MyPosts/ProfileStatus/ProfileStatusContainer';
+import UserStatusContainer from '../UserStatus/UserStatusContainer';
+import {AiOutlineLeft, AiOutlineRight, AiOutlineArrowLeft} from 'react-icons/ai' 
 import s from './User.module.css';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 const User = (props) => {
+
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate('/users')
+    }
+
     return (
-        <div className={s.user}>
-            <div style={
-                {
-                    backgroundImage: `url(
-                        ${props.user.photos.large !== null
-                            ? props.user.photos.large
-                            : `https://picsum.photos/seed/${props.user.userId}/526/300`
-                        })`
-                }
-            }
-                className={s.userImgCard}
-            >
+        <>
+            <UserStatusContainer {...props} />
+            <div className={s.arrowBox}>
+                <AiOutlineArrowLeft onClick={goBack} className={s.arrowBtn}/>
+                {/* <NavLink to={'/users/' + ((props.id*1) - (1*1))}><AiOutlineLeft className={s.arrowBtn}/></NavLink>
+                <NavLink to={'/users/' + ((props.id*1) + (1*1))}><AiOutlineRight className={s.arrowBtn}/></NavLink> */}
+                {/* <AiOutlineLeft className={s.arrowBtn}/>
+                <AiOutlineRight className={s.arrowBtn}/> */}
             </div>
-            <div>
-                <div className={s.profileInfo}>
-                    <img src={
-                        props.user.photos.small !== null
-                            ? props.user.photos.small
-                            : `https://picsum.photos/seed/${props.user.userId}/200/300`
-                    }
-                        className={s.userImg}
-                    />
-                    <div className={s.infoWrapper}>
-                        <div className={s.name}>{props.user.fullName}</div>
-                        <ProfileStatusContainer id={props.id}/>
-                        <div className={s.additionalInfo}>
-                            <div>My id: {props.user.userId}</div>
-                            <div className={s.lookingForAJob}>
-                                {
-                                    props.user.lookingForAJob
-                                        ? 'Looking for a job'
-                                        : 'Not looking for a job'
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </>
     );
 };
-
 
 
 

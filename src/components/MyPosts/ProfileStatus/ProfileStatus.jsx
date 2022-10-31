@@ -1,6 +1,10 @@
 import React from 'react';
 import s from './ProfileStatus.module.css';
 import {AiOutlineEdit} from 'react-icons/ai/'
+import { compose } from 'redux';
+import { withSurrounding } from '../../../hoc/withSurrounding';
+
+
 
 class ProfileStatus extends React.Component {
     
@@ -24,6 +28,13 @@ class ProfileStatus extends React.Component {
         this.setState({
             status: e.currentTarget.value
         })
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
     render() {
         return (
@@ -53,4 +64,6 @@ class ProfileStatus extends React.Component {
     
 };
 
-export default ProfileStatus;
+export default compose(
+    withSurrounding
+)(ProfileStatus)

@@ -21,26 +21,30 @@ class UserAJAX extends React.Component {
                 {this.props.isFetchingUser
                     ? <Preloader />
                     : <User
-                        user={this.props.user}
+                        // user={this.props.user}
+                        lookingForAJob={this.props.lookingForAJob}
+                        fullName={this.props.fullName}
+                        userId={this.props.userId}
+                        photos={this.props.photos}
                         getUserStatus={this.props.getUserStatus}
                         status={this.props.status}
-                        // id={this.props.id}
+                        id={this.props.id}
                     />
                 }
             </>
         )
     }
 }
-
+ 
 
 const UserContainer = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
     const user = useSelector(state => state.usersPage.user);
+    let {lookingForAJob, fullName, userId, photos} = user;
     const isFetchingUser = useSelector(state => state.usersPage.isFetchingUser);
     const status = useSelector(state => state.profilePage.status);
-
 
     const setStatus = (id) => {
         dispatch(getStatusThunkCreator(id))
@@ -50,10 +54,15 @@ const UserContainer = () => {
         dispatch(getUserThunkCreator(id))
     }
 
+
     return (
         <UserAJAX
             id={id}
-            user={user}
+            // user={user}
+            lookingForAJob={lookingForAJob}
+            fullName={fullName}
+            userId={userId}
+            photos={photos}
             isFetchingUser={isFetchingUser}
             status={status}
             getUser={getUser}

@@ -21,19 +21,20 @@ let initialState = {
     isFetchingComm: true,
     isFetchingPost: true,
     status: '',
+    isPostDeleted: false,
     newPostText: 'it-kamasutra',
 }
 
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case DELETE_POST: {
-            let stateCopy = {
-                ...state,
-                partPost: {title: 'title', body: 'body'}
-            };
-            return stateCopy;
-        }
+        // case DELETE_POST: {
+        //     let stateCopy = {
+        //         ...state,
+        //         isPostDeleted: action.isPostDeleted
+        //     };
+        //     return stateCopy;
+        // } 
         case SET_CURRENT_PAGE: {
             return {
                 ...state,
@@ -100,7 +101,7 @@ const profileReducer = (state = initialState, action) => {
 //  ВАЩЕ ХЗ КОНЕЧНО С ЭТИМИ КОПИРОВАНИЯМИ - НАДО ЛИ ИХ ДЕЛАТЬ НА КАЖДЫЙ ЧИХ ИЛИ НЕТ?
 
 
-export const deletePostAC = (id) => ({ type: DELETE_POST, id });
+// export const deletePostAC = (isPostDeleted) => ({ type: DELETE_POST, isPostDeleted });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage})
 export const setPosts = (newPosts) => ({ type: SET_POSTS, newPosts })
 export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
@@ -172,6 +173,18 @@ export const updateStatusThunkCreator = (status) => {
             })
     }
 }
+// export const deletePostThunkCreator = (id) => {
+//     return (dispatch) => {
+//         postsAPI.deletePost(id)
+//             .then(data => {
+//                 debugger;
+//                 if (data.resultCode === 0) {
+//                     dispatch(deletePostAC(data));
+//                     alert(data)
+//                 }
+//             })
+//     }
+// }
 
 
 

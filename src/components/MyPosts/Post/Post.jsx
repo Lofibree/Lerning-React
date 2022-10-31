@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './Post.module.css';
-// import { AiOutlineEdit, AiOutlineCheck, AiOutlineDelete } from 'react-icons/ai';
-
+import { AiOutlineEdit, AiOutlineCheck, AiOutlineDelete } from 'react-icons/ai';
+import {AiOutlineLeft, AiOutlineRight, AiOutlineArrowLeft} from 'react-icons/ai' 
+ 
 
 class Post extends React.Component {
 
@@ -19,6 +20,11 @@ class Post extends React.Component {
         })
     }
 
+    // deletePost() {
+    //     debugger;
+    //     this.props.deletePost(this.props.id)
+    // }
+
     render() {
         return (
             <div className={this.state.styleItem} onClick={this.changeFontStyle.bind(this)} >
@@ -34,6 +40,8 @@ class Post extends React.Component {
                         </div>
                     </main>
                     <footer className={s.footer}>
+                        <AiOutlineArrowLeft onClick={this.props.goBack} className={s.arrowBtn} />
+                        {/* <AiOutlineDelete onClick={this.deletePost.bind(this)}/> */}
                     </footer>
                 </div>
             </div>

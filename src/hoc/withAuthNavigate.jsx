@@ -13,14 +13,18 @@ export const withAuthNavigate = (Component) => {
             if (!this.props.isAuth) {
                 return <Navigate to={'/login'} />
             }
-            return <Component {...this.props} />
+            return (
+                <>
+                    <Component {...this.props} />
+                </>
+            )
         }
     }
 
     let mapStateToPropsForNavigate = (state) => {
         return {
             isAuth: state.auth.isAuth
-        }
+        } 
     }
 
 

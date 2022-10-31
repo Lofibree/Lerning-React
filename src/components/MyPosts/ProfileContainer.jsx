@@ -11,13 +11,17 @@ const ProfileContainer = () => {
   const login = useSelector(state => state.auth.login)
   const id = useSelector(state => state.auth.id)
   const email = useSelector(state => state.auth.email)
+  const lookingForAJob = useSelector(state => state.auth.lookingForAJob)
+  const photos = useSelector(state => state.auth.photos)
 
   return (
     <Profile
       login={login}
       id={id}
       email={email}
-    />
+      lookingForAJob={lookingForAJob}
+      photos={photos}
+    /> 
   );
 };
 

@@ -1,4 +1,5 @@
 import { usersAPI } from "../components/api/api";
+import { postsAPI } from "../components/api/api";
 
 const SET_FOLLOW_UNFOLLOW = 'SET_FOLLOW_UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -9,7 +10,7 @@ const SET_USER = 'SET_USER';
 const SET_USER_IMG_CARD = 'SET_USER_IMG_CARD';
 const TOGGLE_IS_FETCHING_USER = 'TOGGLE_IS_FETCHING_USER';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
-// const SET_STATUS = 'SET_STATUS';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 
 let initialState = {
@@ -21,7 +22,7 @@ let initialState = {
     currentPage: 3,
     isFetching: false,
     isFetchingUser: false,
-    // status: 'no status',
+    status: 'no status',
     followingInProgress: []
 }
  
@@ -92,13 +93,13 @@ const usersReduser = (state = initialState, action) => {
                 : state.followingInProgress.filter(id => id !== action.id)
             }
         }
-        // case SET_STATUS: {
-        //     // debugger;
-        //     return {
-        //         ...state,
-        //         status: action.status
-        //     }
-        // }
+        case SET_USER_STATUS: {
+            // debugger;
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state;
     }
@@ -115,7 +116,7 @@ export const setIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFe
 export const setUserAC = (user) => ({ type: SET_USER, user });
 export const setIsFetchingUserAC = (isFetchingUser) => ({ type: TOGGLE_IS_FETCHING_USER, isFetchingUser });
 export const toggleFollowingProgressAC = (followingInProgress, id) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, id });
-// export const setStatusAC = (status) => ({ type: SET_STATUS, status })
+export const setUserStatusAC = (status) => ({ type: SET_USER_STATUS, status })
 
 
 export const getUsersThunkCreator = (pageSize, currentPage) => {
@@ -173,5 +174,16 @@ export const getUserThunkCreator = (userId) => {
             })
     }
 }
+export const getUserStatusThunkCreator = (id) => {
+    return (dispatch) => {
+        postsAPI.getStatus(id)
+            .then(data => {
+                // debugger;
+                dispatch(setUserStatusAC(data));
+            })
+    }
+}
+
+
 
 export default usersReduser; 

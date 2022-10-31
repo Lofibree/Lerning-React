@@ -15,6 +15,7 @@ class ProfileStatusAJAX extends React.Component {
             <ProfileStatus
                 updateStatus={this.props.updateStatus}
                 status={this.props.status}
+                {...this.props}
             />
         );
     }
@@ -40,6 +41,7 @@ const ProfileStatusContainer = (props) => {
             updateStatus={updateStatus}
             status={status}
             id={props.id}
+            {...props}
         />
     )
 }
