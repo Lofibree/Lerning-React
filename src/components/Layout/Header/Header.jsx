@@ -22,7 +22,7 @@ const Header = (props) => {
                                 email={props.email}
                                 id={props.id}
                             />
-                            : <NavLink to={'/login'}>Login</NavLink>
+                            : <NavLink to={'/login'} onClick={props.getIsAuthThunkCreator}>Login</NavLink>
                     }
                 </div>
             </div>

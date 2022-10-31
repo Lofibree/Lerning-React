@@ -1,23 +1,18 @@
 import React from 'react';
-import { usersAPI } from '../../api/api';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
 import User from './User';
-import { setIsFetchingUserAC, setUserAC, setUserImgCardAC } from './../../../redux/usersReducer';
+import { getUserThunkCreator } from './../../../redux/usersReducer';
 import Preloader from '../../common/Preloader/Preloader';
+import { getStatusThunkCreator } from '../../../redux/profileReducer';
 
 
 class UserAJAX extends React.Component {
-    constructor(props) { super(props) };
 
     componentDidMount() {
-        this.props.setIsFetchingUser(true)
-        usersAPI.setUserProfile(this.props.id)
-            .then(data => {
-                this.props.setIsFetchingUser(false);
-                this.props.setUser(data);
-            })
+        this.props.getUser(this.props.id);
+        this.props.setStatus(this.props.id)
     }
 
     render() {
@@ -27,9 +22,11 @@ class UserAJAX extends React.Component {
                     ? <Preloader />
                     : <User
                         user={this.props.user}
+                        getUserStatus={this.props.getUserStatus}
+                        status={this.props.status}
+                        // id={this.props.id}
                     />
                 }
-
             </>
         )
     }
@@ -42,12 +39,15 @@ const UserContainer = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.usersPage.user);
     const isFetchingUser = useSelector(state => state.usersPage.isFetchingUser);
+    const status = useSelector(state => state.profilePage.status);
 
-    const setUser = (user) => {
-        dispatch(setUserAC(user))
+
+    const setStatus = (id) => {
+        dispatch(getStatusThunkCreator(id))
     }
-    const setIsFetchingUser = (isFetchingUser) => {
-        dispatch(setIsFetchingUserAC(isFetchingUser))
+
+    const getUser = (id) => {
+        dispatch(getUserThunkCreator(id))
     }
 
     return (
@@ -55,8 +55,9 @@ const UserContainer = () => {
             id={id}
             user={user}
             isFetchingUser={isFetchingUser}
-            setIsFetchingUser={setIsFetchingUser}
-            setUser={setUser}
+            status={status}
+            getUser={getUser}
+            setStatus={setStatus}
         />
     );
 };

@@ -6,12 +6,11 @@ import FrendItem from './FrendItem/FrendItem';
 
 
 const Navbar = () => {
-    // const store = useStore();
-    const state = useSelector(state => state.navBar);
 
-    const friendEl = state.map(f => <FrendItem name={f.name}/>);
+    const navBar = useSelector(state => state.navBar);
 
-    // debugger; 
+    const friendEl = navBar.map(f => <FrendItem name={f.name}/>);
+
     return (
         <div className={s.navdiv}>
             <nav className={s.nav}>
@@ -45,14 +44,14 @@ const Navbar = () => {
                         Users
                     </NavLink>
                 </div>
-                <div className={s.friendsEl}>
+                {/* <div className={s.friendsEl}>
                     <div>
                         Friends
                     </div>
                     <div className={s.friends}>
                         {friendEl}
                     </div>
-                </div>
+                </div> */}
             </nav>
         </div>
     )

@@ -2,7 +2,7 @@
 .posts {
     /* margin: 10px; */
     padding: 10px;
-    padding-left: 50px;
+    /* padding-left: 50px; */
     color: white;
     background-color: rgb(33, 96, 123);
     -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
@@ -92,6 +92,7 @@
 .pagesNumberBox {
     width: 70%;
     margin: 0 auto;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,7 +1,7 @@
-import './App.css';
+import './App.scss';
 import Navbar from './components/Layout/Navbar/Navbar';
 import Footer from './components/Layout/Footer/Footer';
-import Profile from './components/MyPosts/Profile';
+import ProfileContainer from './components/MyPosts/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import { Route, Routes } from 'react-router-dom';
 import DialogContainer from './components/Dialogs/Dialog/DialogContainer';
@@ -9,6 +9,7 @@ import UsersContainer from './components/Users/UsersContainer';
 import PostPageContainer from './components/MyPosts/Post/PostPageContainer';
 import UserContainer from './components/Users/UserContainer/UserContainer';
 import HeaderContainer from './components/Layout/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 
 const App = (props) => {
@@ -22,7 +23,7 @@ const App = (props) => {
         <div className="app-content">
           <Routes>
             <Route path='/profile'
-              element={<Profile />}
+              element={<ProfileContainer />}
             />
             <Route path='/profile/:id'
               element={<PostPageContainer />}
@@ -38,6 +39,9 @@ const App = (props) => {
             />
             <Route path='/users/:id'
               element={<UserContainer />}
+            />
+            <Route path='/login'
+              element={<Login />}
             />
           </Routes>
         </div>

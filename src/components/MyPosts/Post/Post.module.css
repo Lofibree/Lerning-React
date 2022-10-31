@@ -12,7 +12,7 @@
     word-wrap: break-word;
 }
 
-/* .item.active {
+.item.active {
     color: white;
     padding: 5px;
     border-radius: 10px;
@@ -20,7 +20,7 @@
     box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     margin: 5px;
     background-color: darkgray;
-} */
+}
 
 .item:hover {
     background-color: rgb(69, 69, 128);
@@ -51,9 +51,8 @@
 }
 .container img {
     align-content: center;
-    width: 526px;
+    width: 560px;
     height: 300px;
-    /* margin-right: 20px; */
     border-radius: 10px;
     object-fit: cover;
 }

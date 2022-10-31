@@ -13,18 +13,14 @@ const instanseJSONPLACE = axios.create({
     baseURL: 'https://jsonplaceholder.typicode.com/'
 })
 
-// export const headerAPI = {
-//     setIsAuth() {
-//         debugger;
-
-//         instanseSAMURAI.get(`auth/me`)
-//         .then(response => {
-//         debugger;
-
-//             return response.data
-//         })
-//     }
-// }
+export const headerAPI = {
+    setIsAuth() {
+        return instanseSAMURAI.get('auth/me')
+        .then(response => {
+            return response.data
+        })
+    }
+}
 
 export const postsAPI = {
     setPosts(currentPage) {
@@ -48,6 +44,20 @@ export const postsAPI = {
     setComments(id) {
         return instanseJSONPLACE.get(`comments?postId=${id}`)
         .then(response => {
+            return response.data
+        })
+    },
+    updateStatus(status) {
+        return instanseSAMURAI.put(`profile/status`, {status})
+        .then(response => {
+            // debugger;
+            return response.data
+        })
+    },
+    getStatus(id) {
+        return instanseSAMURAI.get(`profile/status/${id}`)
+        .then(response => {
+            // debugger;
             return response.data
         })
     },
@@ -78,8 +88,8 @@ export const usersAPI = {
                 return response.data
             })
     },
-    setUserProfile(id) {
-        return instanseSAMURAI.get(`profile/${id}`)
+    setUserProfile(userId) {
+        return instanseSAMURAI.get(`profile/${userId}`)
         .then(response => {
             return response.data
         })

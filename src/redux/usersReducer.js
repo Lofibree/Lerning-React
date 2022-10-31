@@ -1,7 +1,6 @@
+import { usersAPI } from "../components/api/api";
 
-
-const SET_FOLLOW = 'SET_FOLLOW';
-const SET_UNFOLLOW = 'SET_UNFOLLOW';
+const SET_FOLLOW_UNFOLLOW = 'SET_FOLLOW_UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
@@ -10,6 +9,7 @@ const SET_USER = 'SET_USER';
 const SET_USER_IMG_CARD = 'SET_USER_IMG_CARD';
 const TOGGLE_IS_FETCHING_USER = 'TOGGLE_IS_FETCHING_USER';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+// const SET_STATUS = 'SET_STATUS';
 
 
 let initialState = {
@@ -21,14 +21,15 @@ let initialState = {
     currentPage: 3,
     isFetching: false,
     isFetchingUser: false,
+    // status: 'no status',
     followingInProgress: []
 }
-
+ 
 
 
 const usersReduser = (state = initialState, action) => {
     switch (action.type) {
-        case SET_FOLLOW: {
+        case SET_FOLLOW_UNFOLLOW: {
             let stateCopy = {
                 ...state,
                 usersBank: [...state.usersBank]
@@ -36,16 +37,6 @@ const usersReduser = (state = initialState, action) => {
             let neededUserIndex = stateCopy.usersBank.findIndex(user => user.id === action.id)
             stateCopy.usersBank[neededUserIndex] = {...state.usersBank[neededUserIndex]}
             stateCopy.usersBank[neededUserIndex].followed = action.isFollowedResault
-            return stateCopy
-        }
-        case SET_UNFOLLOW: {
-            let stateCopy = {
-                ...state,
-                usersBank: [...state.usersBank]
-            }
-            let neededUserIndex = stateCopy.usersBank.findIndex(user => user.id === action.id)
-            stateCopy.usersBank[neededUserIndex] = {...state.usersBank[neededUserIndex]}
-            stateCopy.usersBank[neededUserIndex].followed = action.isUnFollowedResault
             return stateCopy
         }
         case SET_USERS: {
@@ -101,6 +92,13 @@ const usersReduser = (state = initialState, action) => {
                 : state.followingInProgress.filter(id => id !== action.id)
             }
         }
+        // case SET_STATUS: {
+        //     // debugger;
+        //     return {
+        //         ...state,
+        //         status: action.status
+        //     }
+        // }
         default:
             return state;
     }
@@ -109,8 +107,7 @@ const usersReduser = (state = initialState, action) => {
 
 
 
-export const setFollowAC = (isFollowedResault, id) => ({ type: SET_FOLLOW, isFollowedResault, id });
-export const setUnFollowAC = (isUnFollowedResault, id) => ({ type: SET_UNFOLLOW, isUnFollowedResault, id });
+export const setFollowUnFollowAC = (isFollowedResault, id) => ({ type: SET_FOLLOW_UNFOLLOW, isFollowedResault, id });
 export const setUsersAC = (newUsers) => ({ type: SET_USERS, newUsers: newUsers });
 export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage})
 export const setTotalUsersCountAC = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
@@ -118,6 +115,63 @@ export const setIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFe
 export const setUserAC = (user) => ({ type: SET_USER, user });
 export const setIsFetchingUserAC = (isFetchingUser) => ({ type: TOGGLE_IS_FETCHING_USER, isFetchingUser });
 export const toggleFollowingProgressAC = (followingInProgress, id) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, id });
+// export const setStatusAC = (status) => ({ type: SET_STATUS, status })
 
+
+export const getUsersThunkCreator = (pageSize, currentPage) => {
+    return (dispatch) => {
+        // debugger;
+        dispatch(setIsFetchingAC(true));
+        usersAPI.setUsers(pageSize, currentPage)
+            .then(data => {
+                dispatch(setIsFetchingAC(false));
+                dispatch(setUsersAC(data.items));
+                dispatch(setTotalUsersCountAC(data.totalCount));
+            })
+    }
+}
+export const getOnPageChangedUsersThunkCreator = (pageSize, pageNumber) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingAC(true));
+        dispatch(setCurrentPageAC(pageNumber));
+        usersAPI.onPageSetUsers(pageSize, pageNumber)
+            .then(data => {
+                dispatch(setIsFetchingAC(false));
+                dispatch(setUsersAC(data.items));
+            })
+    }
+}
+export const setFollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgressAC(true, userId));
+        usersAPI.setFollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setFollowUnFollowAC(true, userId))
+            }
+            dispatch(toggleFollowingProgressAC(false, userId));
+        })
+    }
+}
+export const setUnFollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgressAC(true, userId));
+        usersAPI.setUnFollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setFollowUnFollowAC(false, userId))
+            }
+            dispatch(toggleFollowingProgressAC(false, userId));
+        })
+    }
+}
+export const getUserThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingUserAC(true))
+        usersAPI.setUserProfile(userId)
+            .then(data => {
+                dispatch(setIsFetchingUserAC(false))
+                dispatch(setUserAC(data));
+            })
+    }
+}
 
 export default usersReduser; 

@@ -1,0 +1,21 @@
+.authorizeWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authorizeText {
+    position: relative;
+    margin-top: -95px;
+    color: black;
+    font-weight: 700;
+    font-size: 55px;
+    mix-blend-mode:difference;
+    color: white;
+    font-family:cursive;
+}
+
+img {
+    width: 560px;
+    border-radius: 10px;
+}

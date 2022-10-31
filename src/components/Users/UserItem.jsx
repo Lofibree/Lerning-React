@@ -1,22 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import s from './Users.module.css';
+import s from './Users.module.scss';
 
 
 
 
 
 const UserItem = (props) => {
-    // debugger;
+
     const onFollowClick = () => {
-        // debugger;
-        props.onFollowClick(props.id)
-        // debugger;
+        props.setFollow(props.id)
     }
     const onUnFollowClick = () => {
-        // debugger;
-        props.onUnFollowClick(props.id)
-        // debugger;
+        props.setUnFollow(props.id)
     }
 
     return (
@@ -31,8 +27,10 @@ const UserItem = (props) => {
                 </NavLink>
                 <div>
                     {props.isFollowed
-                        ? <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={onUnFollowClick} >UnFollow</button>
-                        : <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={onFollowClick} >Follow</button>
+                        ? <button disabled={props.followingInProgress.some(id => id === props.id)}
+                            onClick={onUnFollowClick} >UnFollow</button>
+                        : <button disabled={props.followingInProgress.some(id => id === props.id)}
+                            onClick={onFollowClick} >Follow</button>
                     }
                 </div>
             </div>

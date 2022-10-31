@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import s from './Dialogs.module.css';
 import { AiOutlineUserAdd, AiOutlineCheck } from 'react-icons/ai'
+import {Navigate} from 'react-router-dom';
 
 
 
 
 const Dialogs = (props) => {
 
-
     const [styleCompleteBtn, setStyleCompleteBtn] = useState(s.completeAddDialogBtn)
     const [styleAddDialog, setStyleAddDialog] = useState(s.newAddDialogText)
-
-
 
     let nameNewDialogEl = React.createRef();
 

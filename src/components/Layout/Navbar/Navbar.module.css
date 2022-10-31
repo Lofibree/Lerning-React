@@ -2,12 +2,12 @@
     grid-area: n;
     background-color: blueviolet;
     background-color: #21438C;
+    min-height: 500px;
     padding: 7px;
     font-size: 24px;
     -webkit-box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     box-shadow: 0 5px 15px 0 rgb(0 0 0 / 50%);
     border-radius: 10px;
-
 }
 
 .nav {
@@ -15,11 +15,8 @@
     background-color: #21438C;
     padding: 7px;
     font-size: 24px;
-    /* display: grid;
-    grid-template-rows: 1fr 10fr ; */
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
 }
 
 .nav a {
@@ -41,27 +38,24 @@ a.activeLink {
 }
 
 .friendsEl {
-    /* position: fixed;
-    top: 300px; */
     margin-top: 100%;
 }
 
 .friends {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
 .friends img {
-    width: 3.5rem;
-    height: 3.5rem;
-    padding-right: 2px;
-    border-radius: 20px;
+    width: 3rem;
+    height: 3rem;
+    margin: 0;
+    border-radius: 50%;
     object-fit: cover;
 }
 
 .friendItem {
-    padding: 3px;
     font-size: 16px;
     text-align: center;
 }

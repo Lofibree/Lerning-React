@@ -5,6 +5,9 @@ import { NavLink } from 'react-router-dom';
 import Dialogs from './Dialogs';
 import { addDialogActionCreator, onAddDialogChangeActionCreator } from '../../redux/messagesReducer';
 import { connect } from 'react-redux/es/exports';
+import { withAuthNavigate } from '../../hoc/withAuthNavigate';
+import { compose } from 'redux';
+
 
 
 
@@ -30,8 +33,7 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-
-
-
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthNavigate
+) (Dialogs)

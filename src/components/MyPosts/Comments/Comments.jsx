@@ -6,7 +6,6 @@ const Comments = (props) => {
     return (
         <div>
             <h3 className={s.postId}>Comments</h3>
-            {/* <div>Author: {props.postAuthor}</div> */}
             {props.commentsEl}
         </div>
     );

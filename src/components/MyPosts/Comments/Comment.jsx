@@ -5,7 +5,7 @@ const Comment = (props) => {
     return (
         <div className={s.comment}>
             <header className={s.headerComment}>
-                <span className={s.name}>{props.name}</span>
+                <span><a className={s.name}>{props.name}</a></span>
                 <div className={s.email}>{props.email}</div>
             </header>
             <main>

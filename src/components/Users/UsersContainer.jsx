@@ -1,43 +1,26 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import UserItemContainer from './UserItemContainer';
-import { setUsersAC, setCurrentPageAC, setTotalUsersCountAC, setIsFetchingAC } from '../../redux/usersReducer';
+import { getUsersThunkCreator, getOnPageChangedUsersThunkCreator } from '../../redux/usersReducer';
 import { useDispatch } from 'react-redux';
 import Users from './Users';
-import { usersAPI } from '../api/api';
 import Preloader from '../common/Preloader/Preloader';
+import { withAuthNavigate } from '../../hoc/withAuthNavigate';
+import { compose } from 'redux';
+
+
+
 
 
 
 class UsersAJAX extends React.Component {
-    
-    constructor(props) {super(props);}
-
 
     componentDidMount() {
-        this.props.setIsFetchingCont(true);
-        usersAPI.setUsers(this.props.pageSize, this.props.currentPage)
-            .then(data => {
-                this.props.setIsFetchingCont(false);
-                this.props.setUsersCont(data.items);
-                this.props.setTotalUsersCountCont(data.totalCount);
-            })
+        this.props.getUsers(this.props.pageSize, this.props.currentPage);
     }
-
-
-
     onPageChanged = (pageNumber) => {
-        this.props.setIsFetchingCont(true);
-        this.props.setCurrentPageCont(pageNumber);
-        
-        usersAPI.onPageSetUsers(this.props.pageSize, pageNumber)
-        .then(data => {
-            this.props.setIsFetchingCont(false);
-            this.props.setUsersCont(data.items);
-        })
+        this.props.getOnPageChangedUsers(this.props.pageSize, pageNumber)
     }
-
-
 
     render() {
         return (
@@ -58,7 +41,6 @@ class UsersAJAX extends React.Component {
 }
 
 
-
 const UsersContainer = () => {
 
     const dispatch = useDispatch();
@@ -68,21 +50,11 @@ const UsersContainer = () => {
     const currentPage = useSelector(state => state.usersPage.currentPage);
     const isFetching = useSelector(state => state.usersPage.isFetching);
 
-
-    // const onClickFollowUnFollow = (id) => {
-    //     dispatch(followUnFollowAC(id));
-    // }
-    const setUsers = (newUsers) => {
-        dispatch(setUsersAC(newUsers))
+    const getUsers = (pageSize, currentPage) => {
+        dispatch(getUsersThunkCreator(pageSize, currentPage))
     }
-    const setTotalUsersCount = (totalCount) => {
-        dispatch(setTotalUsersCountAC(totalCount))
-    }
-    const setCurrentPage = (currentPage) => {
-        dispatch(setCurrentPageAC(currentPage))
-    }
-    const setIsFetching = (isFetching) => {
-        dispatch(setIsFetchingAC(isFetching))
+    const getOnPageChangedUsers = (pageSize, pageNumber) => {
+        dispatch(getOnPageChangedUsersThunkCreator(pageSize, pageNumber))
     }
 
     const usersItemsEl = users
@@ -91,9 +63,6 @@ const UsersContainer = () => {
                 id={u.id}
                 status={u.status}
                 photo={u.photos.small}
-                // isFollowed={u.followed
-                //     ? 'Unfollow'
-                //     : 'Follow'}
             />
         );
 
@@ -104,13 +73,15 @@ const UsersContainer = () => {
             currentPage={currentPage}
             usersItemsEl={usersItemsEl}
             isFetching={isFetching}
-            setUsersCont={setUsers}
-            setTotalUsersCountCont={setTotalUsersCount}
-            setCurrentPageCont={setCurrentPage}
-            setIsFetchingCont={setIsFetching}
+            getUsers={getUsers}
+            getOnPageChangedUsers={getOnPageChangedUsers}
         />
     );
 };
 
 
-export default UsersContainer;
+
+ 
+export default compose(
+    withAuthNavigate
+) (UsersContainer)
