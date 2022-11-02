@@ -6,6 +6,8 @@ import User from './User';
 import { getUserThunkCreator } from './../../../redux/usersReducer';
 import Preloader from '../../common/Preloader/Preloader';
 import { getStatusThunkCreator } from '../../../redux/profileReducer';
+import { compose } from 'redux';
+import { withAuthNavigate } from './../../../hoc/withAuthNavigate'
 
 
 class UserAJAX extends React.Component {
@@ -73,4 +75,6 @@ const UserContainer = () => {
 
 
 
-export default UserContainer;
+export default compose(
+    withAuthNavigate
+) (UserContainer)

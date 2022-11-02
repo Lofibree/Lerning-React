@@ -15,7 +15,10 @@
     font-family:cursive;
 }
 
-img {
+.authorizeWrapper img {
     width: 560px;
     border-radius: 10px;
+}
+.formLogin {
+    margin-top: 25px;
 }

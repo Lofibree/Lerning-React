@@ -12,7 +12,7 @@ const User = (props) => {
     const goBack = () => {
         navigate('/users')
     }
-
+ 
     return (
         <>
             <UserStatusContainer {...props} />

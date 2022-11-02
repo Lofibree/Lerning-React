@@ -49,14 +49,20 @@
 .postId {
     margin: 5px auto;
 }
-.container img {
+.container .img {
+    align-content: center;
+    min-width: 560px;
+    min-height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+/* .img {
     align-content: center;
     width: 560px;
     height: 300px;
     border-radius: 10px;
     object-fit: cover;
-}
-
+} */
 .headerPost .postAuthor {
     width: auto;
     font-size: 18px;

@@ -13,10 +13,26 @@ const instanseJSONPLACE = axios.create({
     baseURL: 'https://jsonplaceholder.typicode.com/'
 })
 
-export const headerAPI = {
+// export const headerAPI = {
+//     setIsAuth() {
+//         return instanseSAMURAI.get('auth/me')
+//         .then(response => {
+//             return response.data
+//         })
+//     }
+// }
+
+export const loginAPI = {
     setIsAuth() {
         return instanseSAMURAI.get('auth/me')
         .then(response => {
+            return response.data
+        })
+    },
+    login(email, password) {
+        return instanseSAMURAI.post(`auth/login`, {email, password})
+        .then(response => {
+            // debugger;
             return response.data
         })
     }

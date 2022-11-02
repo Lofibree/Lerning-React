@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Post.module.css';
 import { AiOutlineEdit, AiOutlineCheck, AiOutlineDelete } from 'react-icons/ai';
 import {AiOutlineLeft, AiOutlineRight, AiOutlineArrowLeft} from 'react-icons/ai' 
+import PhotoPopupOnClick from '../../PhotoPopup/PhotoPopupOnClick';
  
 
 class Post extends React.Component {
@@ -30,7 +31,11 @@ class Post extends React.Component {
             <div className={this.state.styleItem} onClick={this.changeFontStyle.bind(this)} >
                 <div className={s.container}>
                     <h3 className={s.postId}>Post's id: {this.props.id}</h3>
-                    <div><img src={`https://picsum.photos/seed/${this.props.id}/526/300`} /></div>
+                    <div>
+                        <PhotoPopupOnClick id={this.props.id} name={this.props.title}>
+                            <img src={`https://picsum.photos/seed/${this.props.id}/526/300`} className={s.img}/>
+                        </PhotoPopupOnClick>
+                    </div>
                     <header className={s.headerPost}>
                         <div className={s.postAuthor}>{this.props.title}</div>
                     </header>

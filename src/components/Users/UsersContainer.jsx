@@ -59,7 +59,8 @@ const UsersContainer = () => {
 
     const usersItemsEl = users
         .map(u => 
-            <UserItemContainer name={u.name}
+            <UserItemContainer 
+                name={u.name}
                 id={u.id}
                 status={u.status}
                 photo={u.photos.small}

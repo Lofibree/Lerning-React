@@ -22,7 +22,7 @@ const UserItem = (props) => {
                     <img
                         src={props.photo !== null
                             ? props.photo
-                            : `https://picsum.photos/seed/${props.id}/200/300`
+                            : `https://picsum.photos/seed/${props.id}/300/200`
                         } />
                 </NavLink>
                 <div>

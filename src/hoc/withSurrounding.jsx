@@ -1,42 +1,41 @@
 import React from 'react';
 import s from '../components/Users/UserContainer/User.module.css';
-import fakePhoto from './../accets/images/placeholderImage.png'
-import {BiImageAlt} from 'react-icons/bi'
-
+import fakePhoto from './../accets/images/default-img.img'
+import { BiImageAlt } from 'react-icons/bi'
+import PhotoPopupOnClick from '../components/PhotoPopup/PhotoPopupOnClick';
+import PhotoHover from '../PhotoHover/PhotoHover';
 
 
 export const withSurrounding = (Component) => {
 
     class SurroundComponent extends React.Component {
 
-        getRandom() {
-            Math.floor(Math.random()*this.props.userId)
-        }
         render() {
             return (
                 <>
                     <div className={s.user}>
-                        <div style={
-                            {
-                                backgroundImage: `url(
-                        ${this.props.photos.large !== null
+                        <div className={s.userImgCardWrapper}>
+                            <PhotoPopupOnClick id={this.props.id || this.props.userId} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
+                                <img src={
+                                    this.props.photos.large !== null
                                         ? this.props.photos.large
-                                        : `https://picsum.photos/seed/${this.props.userId|| this.props.id}/560/300`
-                                    })`
-                            }
-                        }
-                            className={s.userImgCard}
-                        >
+                                        : `https://picsum.photos/seed/${this.props.userId || this.props.id}/580/310`
+                                }
+                                    className={s.userImgCard}
+                                />
+                            </PhotoPopupOnClick>
                         </div>
                         <div>
                             <div className={s.profileInfo}>
-                                <img src={
-                                    this.props.photos.small !== null
-                                        ? this.props.photos.small
-                                        : `https://picsum.photos/seed/${this.props.userId|| this.props.id}/200/300`
-                                }
-                                    className={s.userImg}
-                                />
+                                <PhotoPopupOnClick id={this.props.id || this.props.userId} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
+                                    <img src={
+                                        this.props.photos.small !== null
+                                            ? this.props.photos.small
+                                            : `https://picsum.photos/seed/${this.props.userId || this.props.id}/300/200`
+                                    }
+                                        className={s.userImg}
+                                    />
+                                </PhotoPopupOnClick>
                                 <div className={s.infoWrapper}>
                                     <div className={s.name}>{this.props.fullName || this.props.login}</div>
                                     <Component {...this.props} />
@@ -58,15 +57,28 @@ export const withSurrounding = (Component) => {
                                     <span>Photos</span>
                                 </div>
                                 <div className={s.photos}>
-                                <img src={`https://picsum.photos/seed/${this.props.userId -10 || this.props.id -10}/200/300`} />
-                                    <img src=
-                                        {
-                                            this.props.photos.small !== null
-                                                ? this.props.photos.small
-                                                : `https://picsum.photos/seed/${this.props.userId || this.props.id}/200/300`
-                                        }
-                                    />
-                                    <img src={fakePhoto} />
+                                    <PhotoPopupOnClick id={this.props.id -10 || this.props.userId -10} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
+                                        <img
+                                            src={`https://picsum.photos/seed/${this.props.userId - 10 || this.props.id - 10}/300/200`}
+                                            className={s.img}
+                                        />
+                                    </PhotoPopupOnClick>
+                                    <PhotoPopupOnClick id={this.props.id || this.props.userId} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
+                                        <img src=
+                                            {
+                                                this.props.photos.small !== null
+                                                    ? this.props.photos.small
+                                                    : `https://picsum.photos/seed/${this.props.userId || this.props.id}/300/200`
+                                            }
+                                            className={s.img}
+                                        />
+                                    </PhotoPopupOnClick>
+                                    <PhotoPopupOnClick id={this.props.id || this.props.userId} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
+                                        <img
+                                            src={fakePhoto}
+                                            className={s.img}
+                                        />
+                                    </PhotoPopupOnClick>
                                 </div>
                             </div>
                         </div>
