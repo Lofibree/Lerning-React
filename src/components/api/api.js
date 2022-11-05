@@ -35,7 +35,14 @@ export const loginAPI = {
             // debugger;
             return response.data
         })
-    }
+    },
+    logout() {
+        return instanseSAMURAI.delete(`auth/login`)
+        .then(response => {
+            // debugger;
+            return response.data
+        })
+    },
 }
 
 export const postsAPI = {

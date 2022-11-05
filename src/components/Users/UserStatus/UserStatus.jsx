@@ -18,6 +18,8 @@ class UserStatus extends React.Component {
 
 
 
-export default compose(
-    withSurrounding
-) (UserStatus)
+// export default compose(
+//     withSurrounding
+// ) (UserStatus)
+
+export default UserStatus

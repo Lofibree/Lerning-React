@@ -1,8 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
-import { AiOutlineEdit, AiOutlineCheck, AiOutlineDelete } from 'react-icons/ai';
-import {AiOutlineLeft, AiOutlineRight, AiOutlineArrowLeft} from 'react-icons/ai' 
-import PhotoPopupOnClick from '../../PhotoPopup/PhotoPopupOnClick';
+import { AiOutlineArrowLeft } from 'react-icons/ai'
+import PhotoPopupOnClick from '../../common/PhotoPopup/PhotoPopupOnClick';
  
 
 class Post extends React.Component {

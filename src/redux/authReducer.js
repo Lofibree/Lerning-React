@@ -1,10 +1,10 @@
-import { headerAPI, loginAPI, usersAPI } from "../components/api/api";
+import { stopSubmit } from "redux-form";
+import { loginAPI, usersAPI } from "../components/api/api";
 
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_MY_PROFILE = 'SET_MY_PROFILE';
 const LOGIN = 'LOGIN';
-
 
 let initialState = {
     id: null, 
@@ -24,7 +24,6 @@ const authReduser = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         }
         case SET_MY_PROFILE: {
@@ -34,7 +33,6 @@ const authReduser = (state = initialState, action) => {
             }
         }
         case LOGIN: {
-            // debugger
             return {
                 ...state,
                 loginData: action.loginData
@@ -48,34 +46,42 @@ const authReduser = (state = initialState, action) => {
 
 
 
-export const setAuthUserData = (id, email, login) => ({ type: SET_USER_DATA, data: {id, email, login} })
+export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, data: {id, email, login, isAuth} })
 export const setMyProfileAC  = (lookingForAJob, photos) => ({ type: SET_MY_PROFILE, data: {lookingForAJob, photos} });
 export const loginAC  = (email, password) => ({ type: LOGIN, loginData: {email, password} });
 
 
 export const getIsAuthThunkCreator = () => {
     return (dispatch) => {
-        loginAPI.setIsAuth().then(data => {
+        return loginAPI.setIsAuth().then(data => {
             if (data.resultCode === 0) {
-                let {id, email, login} = data.data; 
-                dispatch(setAuthUserData(id, email, login));
+                let {id, email, login, isAuth} = data.data; 
+                dispatch(setAuthUserData(id, email, login, true));
                 usersAPI.setUserProfile(id).then(data => {
-                    // debugger;
                     let {lookingForAJob, photos} = data;
                     dispatch(setMyProfileAC(lookingForAJob, photos));
-
                 })
             }
         })
     } 
 } 
-export const loginThunkCreator = (formData) => {
+export const loginThunkCreator = (formData) => (dispatch) => {
+    let {email, password} = formData;
+    loginAPI.login(email, password).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(loginAC(email, password))
+            dispatch(getIsAuthThunkCreator())
+        } else {
+            let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+            dispatch(stopSubmit('login', { _error: message }))
+        }
+    })
+}
+export const logoutThunkCreator = () => {
     return (dispatch) => {
-        let {email, password} = formData;
-        loginAPI.login(email, password).then(data => {
+        loginAPI.logout().then(data => {
             if (data.resultCode === 0) {
-                dispatch(loginAC(email, password))
-                dispatch(getIsAuthThunkCreator())
+                dispatch(setAuthUserData(null, null, null, false));
             }
         })
     } 

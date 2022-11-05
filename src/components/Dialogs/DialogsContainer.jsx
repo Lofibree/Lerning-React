@@ -3,12 +3,12 @@ import s from './Dialogs.module.css';
 import DialogListItem from './DialogListItem/DialogListItem';
 import { NavLink } from 'react-router-dom';
 import Dialogs from './Dialogs';
-import { addDialogActionCreator, onAddDialogChangeActionCreator } from '../../redux/messagesReducer';
+import { addDialogAC } from '../../redux/messagesReducer';
 import { connect } from 'react-redux/es/exports';
 import { withAuthNavigate } from '../../hoc/withAuthNavigate';
 import { compose } from 'redux';
 
-
+ 
 
 
 let mapStateToProps = (state) => {
@@ -23,11 +23,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        onChangeAddDialogCont: (text) => {
-            dispatch(onAddDialogChangeActionCreator(text))
-        },
-        completeNameWriteCont: (text) => {
-            dispatch(addDialogActionCreator(text));
+        addNewDialog: (newDialogBody) => {
+            dispatch(addDialogAC(newDialogBody));
         },
     }
 }

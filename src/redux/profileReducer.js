@@ -1,6 +1,6 @@
 import { postsAPI } from "../components/api/api";
 
-const DELETE_POST = 'DELETE-POST';
+const ADD_NEW_POST = 'ADD_NEW_POST';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_POSTS = 'SET_POSTS';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
@@ -28,13 +28,20 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        // case DELETE_POST: {
-        //     let stateCopy = {
-        //         ...state,
-        //         isPostDeleted: action.isPostDeleted
-        //     };
-        //     return stateCopy;
-        // } 
+        case ADD_NEW_POST: {
+            // debugger;
+
+            let newPost = {
+                id: state.posts.length + 1,
+                title: action.newPostAuthor,
+                body: action.newPostBody
+            }
+            // debugger;
+            return {
+                ...state,
+                posts: [...state.posts, newPost]
+            }
+        }
         case SET_CURRENT_PAGE: {
             return {
                 ...state,
@@ -111,6 +118,7 @@ export const setPostImgAC = (postImg) => ({ type: SET_POST_IMG, postImg })
 export const setParticularPostAC = (post) => ({ type: SET_PARTICULAR_POST, post })
 export const setIsFetchingPostAC = (isFetchingPost) => ({ type: TOGGLE_IS_FETCHING_POST, isFetchingPost })
 export const setStatusAC = (status) => ({ type: SET_STATUS, status })
+export const addNewPostAC = (newPostBody, newPostAuthor) => ({ type: ADD_NEW_POST, newPostBody, newPostAuthor })
 
 
 

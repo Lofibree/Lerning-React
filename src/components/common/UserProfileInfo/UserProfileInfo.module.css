@@ -9,7 +9,6 @@
     padding: 10px;
     margin: 5px;
     width: 600px;
-    /* align-items: center; */
     display: flex; 
     justify-content: center;
     flex-direction: column;
@@ -24,11 +23,9 @@
 .userImgCard {
     width: auto;
     border-radius: 10px;
+    min-height: 300px;
+    min-width: 100px;
 }
-/* .userImgCard.active {
-    width: 380px;
-    height: 300px;
-} */
 
 .profileInfo {
     background-color: white;
@@ -45,7 +42,6 @@
     grid-template-rows: 30px 1fr;
     align-items: center;
     margin-left: 180px;
-    /* width: 215px; */
 }
 .usersId {
     display: flex;
@@ -86,22 +82,7 @@
     margin: 5px auto;
     font-weight: 600;
 }
-.arrowBox {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: 25px;
-}
-.arrowBtn {
-    font-size: 35px;
-}
-.arrowBtn:hover {
-    cursor: pointer;
-}
-.arrowBtn a{
-    text-decoration:none;
-    color: white;
-}
+
 .userPhotosBox {
     align-items: center;
     justify-content: center;
@@ -129,13 +110,6 @@
     padding-bottom: 5px;
     padding-top: 5px;
 }
-/* .photos img {
-    width: 175px;
-    height: 140px;
-    margin: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-} */
 .img {
     align-content: center;
     width: 175px;

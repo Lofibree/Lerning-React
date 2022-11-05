@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 const Header = (props) => {
     return (
         <div className={s.header}>
-            <a href='#'><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQldtpBMBBSRnmWKO0X6B2YUcq1SYCdec1kKF6svRKw&s' /></a>
+            <NavLink to={'/'}><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQldtpBMBBSRnmWKO0X6B2YUcq1SYCdec1kKF6svRKw&s' /></NavLink>
             <div className={s.headItems}>
                 <HeadItem title='Home' />
                 <HeadItem title='Contacts' />
@@ -21,6 +21,7 @@ const Header = (props) => {
                                 login={props.login}
                                 email={props.email}
                                 id={props.id}
+                                logoutThunkCreator={props.logoutThunkCreator}
                             />
                             : <NavLink to={'/login'} onClick={props.getIsAuthThunkCreator}>Login</NavLink>
                     }

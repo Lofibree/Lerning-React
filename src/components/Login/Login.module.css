@@ -21,4 +21,12 @@
 }
 .formLogin {
     margin-top: 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.formSummaryError {
+    border: 2px red solid;
+    padding: 5px;
+    color: blue;
 }

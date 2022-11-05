@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './PhotoPopup.module.css';
-import fakePhoto from './../../accets/images/default-img.img'
-import PhotoHover from '../../PhotoHover/PhotoHover';
+import PhotoHover from '../PhotoHover/PhotoHover';
 
 
 const PhotoPopup = (props) => {
@@ -16,11 +15,12 @@ const PhotoPopup = (props) => {
             >
                 <div className={s.bgColor}>
                     <PhotoHover id={props.id} name={props.name} photo={props.photo}>
-                        <img src={
-                            props.src.indexOf('picsum') !== -1
-                                ? `https://picsum.photos/seed/${props.id}/700/560`
-                                : props.src
-                        }
+                        <img src=
+                            {
+                                props.src && props.src.indexOf('https') !== -1
+                                    ? `https://picsum.photos/seed/${props.id}/700/560`
+                                    : props.src
+                            }
                             className={s.img}
                         />
                     </PhotoHover>

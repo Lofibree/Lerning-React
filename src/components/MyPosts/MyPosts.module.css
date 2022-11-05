@@ -112,3 +112,9 @@
     font-weight: 900;
     color: black;
 }
+
+.fieldBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

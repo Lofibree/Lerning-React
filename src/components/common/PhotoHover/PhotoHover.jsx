@@ -9,13 +9,6 @@ const PhotoHover = (props) => {
     // debugger;
     const [style, setStyle] = useState(s.layOnBgCard)
     const [stylePhoto, setStylePhoto] = useState(s.stylePhoto)
-    // const usersBank = useSelector(state => state.usersPage.usersBank)
-    // const getUserName = () => {
-    //     let neededUserIndex = usersBank.findIndex(user => user.id === (props.id || props.userId));
-    //     debugger;
-    //     let userName = usersBank[neededUserIndex].name
-    //     return userName
-    // }
 
     return (
         <div className={s.photoHover}>
@@ -33,7 +26,7 @@ const PhotoHover = (props) => {
                 <div className={stylePhoto}>
                     {props.children}
                 </div>
-                <AiOutlineEdit className={style} />
+                <AiOutlineEdit className={style} /> 
             </div>
             <div className={s.imgCommentsBox}>
                 <div className={s.authorCard}>

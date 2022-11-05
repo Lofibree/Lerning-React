@@ -2,22 +2,20 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import moment from 'moment';
 import { AiOutlineSend } from 'react-icons/ai'
+import { Field, reduxForm } from 'redux-form';
+import {requiredField, maxLengthCreator} from './../../components/Utils/Validators/validators'
+import { TextArea } from '../common/FormsControls/FormsControls';
+import { Button } from '../common/FormsControls/FormsControls';
+
 
 const MyPosts = (props) => {
 
-  let newPostEl = React.createRef();
-  let onAddPost = () => {
-    let timeMesse = moment().format('HH:mm');
-    props.addPost(timeMesse);
-  }
-
-  let onPostChange = () => {
-    let text = newPostEl.current.value;
-    props.updateNewPostText(text);
-  }
-
   let pagesArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  const addNewPost = (values) => {
+    // debugger;
+    props.addNewPostAC(values.newPostBody, values.newPostAuthor);
+  }
 
   return (
     <div>
@@ -36,19 +34,30 @@ const MyPosts = (props) => {
             })
           }
         </div>
-        {/* <div className={s.newPostBox}>
-          <textarea
-            className={s.newPostText}
-            onChange={onPostChange}
-            ref={newPostEl}
-            value={props.value}
-          />
-          <AiOutlineSend onClick={onAddPost} className={s.btnMess} />
-        </div> */}
+        <AddNewPostFormRedux onSubmit={addNewPost}/>
         {props.postsEl}
       </div>
     </div>
   );
 };
+
+const maxLength10 = maxLengthCreator(10);
+
+const AddNewPostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={s.fieldBox}>
+        <Field component={TextArea} name={'newPostBody'} placeholder={'enter new post here'} validate={[requiredField, maxLength10]} />
+        <Field component={TextArea} name={'newPostAuthor'} placeholder={'enter your name here'} validate={[requiredField, maxLength10]} />
+        {/* <button>Post</button> */}
+        <Field component={Button}>Post</Field>
+      </div>
+    </form>
+  )
+}
+
+
+const AddNewPostFormRedux = reduxForm({form: 'addNewPost'}) (AddNewPostForm)
+
 
 export default MyPosts;

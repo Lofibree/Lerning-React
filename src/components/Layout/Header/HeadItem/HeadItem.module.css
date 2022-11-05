@@ -26,4 +26,17 @@
 .itemLogin{
     font-size: 12px;
     margin-right: 5px;
+    display: flex;
+    align-items: center;
+}
+.itemLogin .loginInfo {
+    margin: 5px;
+}
+.itemLogin .logoutBtn {
+    height: 20px;
+    transition: 0.2s ease;
+}
+.itemLogin .logoutBtn:hover {
+    cursor: pointer;
+    transition: 0.2s ease;
 }

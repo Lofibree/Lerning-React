@@ -64,6 +64,8 @@ class ProfileStatus extends React.Component {
     
 };
 
-export default compose(
-    withSurrounding
-)(ProfileStatus)
+// export default compose(
+//     withSurrounding
+// )(ProfileStatus)
+
+export default ProfileStatus

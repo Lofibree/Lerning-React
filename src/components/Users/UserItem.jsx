@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PhotoPopupOnClick from '../common/PhotoPopup/PhotoPopupOnClick';
 import s from './Users.module.scss';
 
 
@@ -18,13 +19,15 @@ const UserItem = (props) => {
     return (
         <div className={s.item}>
             <div className={s.imgPlusFollow}>
-                <NavLink to={'/users/' + props.id}>
+                <PhotoPopupOnClick {...props}>
                     <img
                         src={props.photo !== null
                             ? props.photo
                             : `https://picsum.photos/seed/${props.id}/300/200`
-                        } />
-                </NavLink>
+                        }
+                        className={s.img}
+                    />
+                </PhotoPopupOnClick>
                 <div>
                     {props.isFollowed
                         ? <button disabled={props.followingInProgress.some(id => id === props.id)}

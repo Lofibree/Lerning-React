@@ -1,27 +1,28 @@
 import React from 'react';
 import s from './Dialog.module.css';
-import moment from 'moment';
-import { AiOutlineSend } from 'react-icons/ai';
+import { Field, reduxForm } from 'redux-form';
+import { AiOutlineArrowLeft } from 'react-icons/ai' 
+import { useNavigate } from 'react-router-dom';
+import { requiredField, maxLengthCreator } from '../../Utils/Validators/validators';
+import { Button, TextArea } from '../../common/FormsControls/FormsControls';
+
+
 
 const Dialog = (props) => {
 
-    let newMessEl = React.createRef();
+    const navigate = useNavigate();
 
-    let onMessChange = () => {
-        let text = newMessEl.current.value;
-        props.onMessChangeCont(text);
+    const addNewMess = (values) => {
+        props.addNewMess(values.newMessageBody)
     }
 
-    let addMess = () => {
-        let text = newMessEl.current.value;
-        let timeMesse = moment().format('HH:mm');
-        if (text !== '') {
-            props.addMessCont(timeMesse);
-        }
+    const goBack = () => {
+        navigate(-1);
     }
 
     return (
         <div>
+            <AiOutlineArrowLeft onClick={goBack} className={s.arrowBtn} />
             <header className={s.dialog}>
                 <img src='https://sun9-35.userapi.com/impg/o-p1vCiV1WnL_s1R6fIPxBXMCBkB-4qpxwdm8w/w8n0fXiq28I.jpg?size=487x477&quality=96&sign=2c74b09855001bfe78e3bac37db92f6e&type=album' />
                 {props.name}
@@ -32,18 +33,35 @@ const Dialog = (props) => {
             </main>
             <div className={s.dialogsItems}>
                 <div>
-                    <div className={s.newMessBox}>
-                        <textarea
-                            className={s.newMessText}
-                            ref={newMessEl}
-                            onChange={onMessChange}
-                            value={props.value} />
-                        <AiOutlineSend onClick={addMess} className={s.btnMess} />
-                    </div>
+                    <AddMessBoxFormRedux {...props} onSubmit={addNewMess}/>
                 </div>
             </div>
         </div>
     );
 };
+
+
+const maxLength10 = maxLengthCreator(10);
+
+
+const AddMessForm = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div className={s.newMessBox}>
+                <Field component={TextArea} name='newMessageBody' placeholder='Enter your message' validate={[requiredField, maxLength10]}/>
+                <div>
+                {/* <button className={s.button}>Send</button> */}
+                {/* <Button /> */}
+                <Field component={Button}>Send</Field>
+                </div>
+            </div>
+        </form>
+    )
+}
+
+
+const AddMessBoxFormRedux = reduxForm({form: 'dialogAddMessageForm'}) (AddMessForm)
+
 
 export default Dialog;

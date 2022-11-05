@@ -2,8 +2,8 @@ import React from 'react';
 import s from '../components/Users/UserContainer/User.module.css';
 import fakePhoto from './../accets/images/default-img.img'
 import { BiImageAlt } from 'react-icons/bi'
-import PhotoPopupOnClick from '../components/PhotoPopup/PhotoPopupOnClick';
-import PhotoHover from '../PhotoHover/PhotoHover';
+import PhotoPopupOnClick from '../components/common/PhotoPopup/PhotoPopupOnClick';
+
 
 
 export const withSurrounding = (Component) => {
@@ -29,8 +29,8 @@ export const withSurrounding = (Component) => {
                             <div className={s.profileInfo}>
                                 <PhotoPopupOnClick id={this.props.id || this.props.userId} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
                                     <img src={
-                                        this.props.photos.small !== null
-                                            ? this.props.photos.small
+                                        this.props.photos.large !== null
+                                            ? this.props.photos.large
                                             : `https://picsum.photos/seed/${this.props.userId || this.props.id}/300/200`
                                     }
                                         className={s.userImg}
@@ -66,8 +66,8 @@ export const withSurrounding = (Component) => {
                                     <PhotoPopupOnClick id={this.props.id || this.props.userId} name={this.props.fullName || this.props.login} photo={this.props.photos.large}>
                                         <img src=
                                             {
-                                                this.props.photos.small !== null
-                                                    ? this.props.photos.small
+                                                this.props.photos.large !== null
+                                                    ? this.props.photos.large
                                                     : `https://picsum.photos/seed/${this.props.userId || this.props.id}/300/200`
                                             }
                                             className={s.img}

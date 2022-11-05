@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Message.module.css';
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineCheck } from 'react-icons/ai'
 import { useState } from 'react';
-import { editMessActionCreator, onEditChangeMessActionCreator, 
-    completeEditMessActionCreator, deleteMessActionCreator } from '../../../redux/messagesReducer';
+import { editMessAC, onEditChangeMessAC, 
+    completeEditMessAC, deleteMessAC } from '../../../redux/messagesReducer';
 import Message from './Message'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
@@ -25,24 +25,24 @@ const MessageContainer = (props) => {
         setStyleEditBtn(styleEditBtn + ' ' + s.active);
         setStyleCompleteBtn(styleCompleteBtn + ' ' + s.active);
         // debugger;
-        dispatch(editMessActionCreator(props.index));
+        dispatch(editMessAC(props.index));
     }
 
     let onEditChange = (text) => {
         // debugger;
-        dispatch(onEditChangeMessActionCreator(text, props.index))
+        dispatch(onEditChangeMessAC(text, props.index))
     }
 
     let completeEdit = () => {
         setStyleTextArea(s.editText);
         setStyleEditBtn(s.editBtn);
         setStyleCompleteBtn(s.completeBtn);
-        dispatch(completeEditMessActionCreator(props.index));
+        dispatch(completeEditMessAC(props.index));
     }
 
     let deleteMess = () => {
         // debugger;
-        dispatch(deleteMessActionCreator(props.index))
+        dispatch(deleteMessAC(props.index))
     }
 
 

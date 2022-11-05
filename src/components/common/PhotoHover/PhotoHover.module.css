@@ -33,6 +33,7 @@
 .stylePhoto {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    min-width: 500px;
     transition: 0.5s ease;
     display: flex;
     flex-direction: column;

@@ -4,18 +4,21 @@ import s from './HeadItem.module.css';
 const HeadItem = (props) => {
     return (
         <div className={s.itemLogin}>
-            <div>
-                {props.title}
+            <div className={s.loginInfo}>
+                <div>
+                    {props.title}
+                </div>
+                <div>
+                    {props.login}
+                </div>
+                <div>
+                    {props.email}
+                </div>
+                <div>
+                    {props.id}
+                </div>
             </div>
-            <div>
-                {props.login}
-            </div>
-            <div>
-                {props.email}
-            </div>
-            <div>
-                {props.id}
-            </div>
+            <button onClick={props.logoutThunkCreator} className={s.logoutBtn}>Logout</button>
         </div>
     );
 };
